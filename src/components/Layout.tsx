@@ -1,6 +1,6 @@
 import styled from "styled-components"
-import Sidebar from "./SideBar"
-import Navbar from "./NavBar"
+import Sidebar from "./Sidebar"
+import Navbar from "./Navbar"
 
 const Main = styled.div`
     width: 100%;
