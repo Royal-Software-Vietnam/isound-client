@@ -1,38 +1,39 @@
 import styled from "styled-components"
 import { NavLink } from "react-router-dom"
+import IconNewPlaylist from "./../assets/new-playlist.svg"
 
 const Container = styled.div`
-    width: 16.46%;
+    width: 16.4%;
     background: #161616;
     height: 100vh;
 `
 
 const Logo = styled.div`
-    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 76px;
+    width: 100%;
+    padding-top: 16%;
     .logo-img {
-        width: 134px;
-        height: 134px;
+        width: 6.5rem;
+        height: 6.5rem;
         background: #ffffff;
         border-radius: 50%;
     }
     .label-fullname {
-        font-size: 25px;
-        line-height: 25px;
+        font-size: 1.5rem;
+        line-height: 1.5rem;
         text-align: left;
         color: #ffffff;
-        margin-top: 16px
+        margin-top: 0.8rem;
     }
     .label-account {
-        font-size: 20px;
-        line-height: 20px;
+        font-size: 1.2rem;
+        line-height: 1,2rem;
         text-align: left;
         color: #ffffff;
-        margin-top: 8px
+        margin-top: 0.4rem;
     }
 `
 
@@ -58,16 +59,53 @@ const NavLists = styled.ul`
 
   .primary {
     opacity: 0.75;
-    font-size: 25px;
-    line-height: 25px;
-    margin-top: 89px;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
+    margin-top: 5rem;
   }
 
   .secondary {
     opacity: 1;
-    font-size: 18px;
-    line-height: 18px;
-    margin-top: 20px;
+    font-size: 1.1rem;
+    line-height: 1.1rem;
+    margin-top: 1.2rem;
+  }
+`
+
+const IconNav = styled.div`
+  width: 233px;
+  margin-left: 58px;
+  position: absolute;
+  bottom: 12%;
+  display: flex;
+  align-items: center;
+
+  a {
+    color: #ffffff;
+    opacity: 0.75;
+    text-decoration: none;
+    font-size: 1.1rem;
+    line-height: 1.1rem;
+  }
+
+  .icon-img {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0);
+    border: 2px solid #e9003f;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+
+  img {
+    width: 60%;
+  }
+
+  a:hover {
+    color: #e9003f;
   }
 `
 
@@ -98,5 +136,9 @@ export default function Sidebar() {
                     </NavLink>
                 ))}
             </NavLists> 
+            <IconNav>
+                <div className="icon-img"><img src={IconNewPlaylist} alt="icon-new-playlist" /></div>
+                <NavLink to="/new-playlist">New Playlist</NavLink>
+            </IconNav>
     </Container>
 }
