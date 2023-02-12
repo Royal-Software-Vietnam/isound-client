@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
 import { Button, Modal } from 'antd';
+import styled from 'styled-components';
+import TrollImgSrc from './../assets/troll.svg'
+
+const Image = styled.div`
+        width: 500px;
+        height: 500px;
+        
+        background: center center / cover no-repeat url(${TrollImgSrc});
+
+`
 
 const UserModal: React.FC = () => {
   const [open, setOpen] = useState(false);
@@ -7,19 +17,19 @@ const UserModal: React.FC = () => {
   return (
     <>
       <Button type="primary" onClick={() => setOpen(true)}>
-        Open Modal of 1000px width
+        Đăng nhập
       </Button>
       <Modal
-        title="Modal 1000px width"
         centered
         open={open}
         onOk={() => setOpen(false)}
         onCancel={() => setOpen(false)}
         width={1000}
       >
-        <p>some contents...</p>
-        <p>some contents...</p>
-        <p>some contents...</p>
+        <h1>heheheheh</h1>
+        <Image>
+            
+        </Image>
       </Modal>
     </>
   );
