@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { NavLink } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 
 const Container = styled.div`
     width: 100%;
@@ -56,6 +56,7 @@ const NavLists = styled.ul`
 
   a {
     text-decoration: none;
+
   }
 
   li {
@@ -66,15 +67,18 @@ const NavLists = styled.ul`
     text-align: left;
     letter-spacing: 3px;
     margin-left: 46px;
+
+    
+    &.active {
+    color: #e9003f;
+  }
   }
 
   li:hover {
     color: #e9003f;
   }
 
-  .active {
-    color: #e9003f;
-  }
+  
 `
 
 const links = [
@@ -83,7 +87,11 @@ const links = [
     {name: "Radio", path: "/radio", status: "active"},
 ]
 
+
+
 export default function Navbar() {
+    const location = useLocation()
+
     return <Container>
         <SearchBar>
             <span className="search-icon">
@@ -95,10 +103,8 @@ export default function Navbar() {
                 <NavLink
                     key={index}
                     to={link.path}
-                    className={
-                        ({ isActive}) => isActive ? link.status : undefined
-                    }>
-                    <li>{link.name}</li>
+                    >
+                    <li className={location.pathname === link.path ? 'active' : ""}>{link.name}</li>
                 </NavLink>
             ))}
         </NavLists>
