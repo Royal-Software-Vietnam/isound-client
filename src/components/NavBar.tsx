@@ -91,7 +91,7 @@ const NavLists = styled.ul`
         color: #e9003f;
     }
       
-    li:after {
+    li::after {
         content: "";
         width: 20px;
         height: 2px;
@@ -101,7 +101,7 @@ const NavLists = styled.ul`
         left: 0;
     }
 
-    li.active:after {
+    li.active::after {
         background: #e9003f;
     }
 `

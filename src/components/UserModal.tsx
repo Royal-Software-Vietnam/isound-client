@@ -8,13 +8,13 @@ import { faEnvelope, faUser } from '@fortawesome/free-regular-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 
 const Image = styled.div`
-        width: 50%;
-        height: 70vh;
-        border-radius: 8px;
-        background: center center / cover no-repeat url(${TrollImgSrc});
+    width: 50%;
+    height: 70vh;
+    border-radius: 8px;
+    background: center center / cover no-repeat url(${TrollImgSrc});
 
-        &.active {
-          transform: translateX(100%);
+    &.active {
+      transform: translateX(100%);
     }
 `
 

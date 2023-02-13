@@ -86,6 +86,9 @@ const IconNav = styled.div`
     text-decoration: none;
     font-size: 1.1rem;
     line-height: 1.1rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
   }
 
   .icon-img {
@@ -104,8 +107,9 @@ const IconNav = styled.div`
     width: 60%;
   }
 
-  a:hover {
+  & :hover {
     color: #e9003f;
+    opacity: 1;
   }
 `
 
@@ -138,8 +142,10 @@ export default function Sidebar() {
                 ))}
             </NavLists> 
             <IconNav>
-                <div className="icon-img"><img src={IconNewPlaylist} alt="icon-new-playlist" /></div>
-                <NavLink to="/new-playlist">New Playlist</NavLink>
+                <NavLink to="/new-playlist">
+                  <div className="icon-img"><img src={IconNewPlaylist} alt="icon-new-playlist" /></div>
+                  New Playlist
+                </NavLink>
             </IconNav>
     </Container>
 }
