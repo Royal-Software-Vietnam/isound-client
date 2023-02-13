@@ -1,0 +1,16 @@
+html {
+    font-size: 62.5%;
+}
+
+/* custom antd modal */
+.ant-modal-content {
+    padding: 0 !important;
+}
+
+.ant-modal-body {
+    display: flex;
+}
+
+button.ant-btn.css-dev-only-do-not-override-j0nf2s.ant-btn-default {
+    display: none;
+}
