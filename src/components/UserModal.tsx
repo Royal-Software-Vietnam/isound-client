@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'antd';
 import styled from 'styled-components';
-import TrollImgSrc from '../assets/troll.svg'
 import '../assets/GlobalStyles.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faUser } from '@fortawesome/free-regular-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
+import LoginBackground from "./../assets/login-bc.jpg"
 
-const Image = styled.div`
-    width: 50%;
-    height: 70vh;
-    border-radius: 8px;
-    background: center center / cover no-repeat url(${TrollImgSrc});
-
-    &.active {
-      transform: translateX(100%);
-    }
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  background: center center / cover no-repeat url(${LoginBackground});
+  display: flex;
+  align-items: center;
 `
 
 const FormContainer = styled.div`
-    width: 50%;
+    width: 40%;
     height: 70vh;
     text-align: center;
-
-    background: linear-gradient(to right, #7dd3fc, #0284c7);
+    background: rgba(255, 255, 255, 0.4);
+    box-shadow: 0px 6px 8px rgba(3, 7, 6, 0.8),0px 3px 4px rgba(110, 27, 27, 0.5), 0px 1px 16px rgba(11, 12, 12, 0.5);
     border-radius: 8px;
+    margin: 2rem;
+    transform: translateX(125%);
 
     & .form__header {
         display: flex;
@@ -89,13 +88,14 @@ const FormContainer = styled.div`
         border-radius: 10px;
         border: 0;
         outline: 0;
-        background-color: #dc2626;
+        background-color: #e9003f;
+        opacity: 1;
         font-size: 1.6rem;
         font-weight: 600;
         cursor: pointer;
 
         &:hover {
-          background-color: #ef4444;
+          opacity: 0.75;
         }
       }
     }
@@ -112,7 +112,7 @@ const FormContainer = styled.div`
       }
 
     &.active {
-      transform: translateX(-100%);
+      transform: translateX(0);
     }
 `
 
@@ -152,59 +152,60 @@ const UserModal: React.FC = () => {
         width={1000}
         footer=''
       >
-        <Image className={toggle ? 'active' : ''}/>
-        <FormContainer  className={toggle ? 'active' : ''}>
-            <div className={"form__header"}>
-                <h1 className="form__header-name">
-                    ISOUND
-                </h1>
-                <h2 className="form__header-title">
-                    {toggle ? 'Sign In' : 'Sign Up'}
-                </h2>
-            </div>
-            <div className="form-body">
-              {toggle ? 
-                <>
-                  <div className="form-action">
-                    <FontAwesomeIcon className='icon' icon={faUser}/>
-                    <input type="text" placeholder='Username' />
-                  </div>
-                  <div className="form-action">
-                    <FontAwesomeIcon className='icon' icon={faLock}/>
-                    <input type="text" placeholder='Password' />
-                  </div>
-                  <button className="btn btn-form">
-                    Login
-                  </button>
-                </>
-               : 
-                <>
-                  <div className="form-action">
-                    <FontAwesomeIcon className='icon' icon={faUser}/>
-                    <input type="text" placeholder='Username' />
-                  </div>
-                  <div className="form-action">
-                    <FontAwesomeIcon className='icon' icon={faLock}/>
-                    <input type="text" placeholder='Password' />
-                  </div>
-                  <div className="form-action">
-                    <FontAwesomeIcon className='icon' icon={faEnvelope}/>
-                    <input type="text" placeholder='Email' />
-                  </div>
-                  <button className="btn btn-form">
-                    Sign Up
-                  </button>
-                </>
-              }
-              
-            </div>
-            <div className="form-footer">
-              <p>{toggle ? 'Not a member?' : 'Already have account?'} <span onClick={() => setToggle(!toggle)}>
-                {toggle ? 'Sign In' : 'Sign Up'}
-                </span></p>
-            </div>
-        </FormContainer>
-        
+        {/* <Image className={toggle ? 'active' : ''}/> */}
+        <Container>
+            <FormContainer  className={toggle ? 'active' : ''}>
+              <div className={"form__header"}>
+                  <h1 className="form__header-name">
+                      ISOUND
+                  </h1>
+                  <h2 className="form__header-title">
+                      {toggle ? 'Sign In' : 'Sign Up'}
+                  </h2>
+              </div>
+              <div className="form-body">
+                {toggle ? 
+                  <>
+                    <div className="form-action">
+                      <FontAwesomeIcon className='icon' icon={faUser}/>
+                      <input type="text" placeholder='Username' />
+                    </div>
+                    <div className="form-action">
+                      <FontAwesomeIcon className='icon' icon={faLock}/>
+                      <input type="text" placeholder='Password' />
+                    </div>
+                    <button className="btn btn-form">
+                      Login
+                    </button>
+                  </>
+                : 
+                  <>
+                    <div className="form-action">
+                      <FontAwesomeIcon className='icon' icon={faUser}/>
+                      <input type="text" placeholder='Username' />
+                    </div>
+                    <div className="form-action">
+                      <FontAwesomeIcon className='icon' icon={faLock}/>
+                      <input type="text" placeholder='Password' />
+                    </div>
+                    <div className="form-action">
+                      <FontAwesomeIcon className='icon' icon={faEnvelope}/>
+                      <input type="text" placeholder='Email' />
+                    </div>
+                    <button className="btn btn-form">
+                      Sign Up
+                    </button>
+                  </>
+                }
+                
+              </div>
+              <div className="form-footer">
+                <p>{toggle ? 'Not a member?' : 'Already have account?'} <span onClick={() => setToggle(!toggle)}>
+                  {toggle ? 'Sign Up' : 'Sign In'}
+                  </span></p>
+              </div>
+          </FormContainer>
+        </Container>
       </Modal>
     </>
   );
