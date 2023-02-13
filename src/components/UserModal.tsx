@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal } from 'antd';
 import styled from 'styled-components';
-import TrollImgSrc from '../assets/troll.jpg'
+import TrollImgSrc from '../assets/troll.svg'
 import '../assets/GlobalStyles.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faUser } from '@fortawesome/free-regular-svg-icons';
@@ -116,6 +116,22 @@ const FormContainer = styled.div`
     }
 `
 
+const LoginButton = styled(Button)`
+  height: 2.2rem;
+
+  &.ant-btn-primary {
+    border: 2px solid #e9003f;
+    color: #e9003f;
+    background-color: rgba(0, 0, 0, 0);
+    font-weight: 500;
+  }
+
+  &.ant-btn-primary:hover {
+    color: #ffffff;
+    background-color: #e9003f;
+  }
+`
+
 const UserModal: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [toggle, setToggle] = useState(false)
@@ -126,9 +142,9 @@ const UserModal: React.FC = () => {
 
   return (
     <>
-      <Button type="primary" onClick={() => setOpen(true)}>
-        Đăng nhập
-      </Button>
+      <LoginButton type="primary" onClick={() => setOpen(true)}>
+        Login
+      </LoginButton>
       <Modal
         centered
         open={open}
@@ -142,7 +158,7 @@ const UserModal: React.FC = () => {
                     ISOUND
                 </h1>
                 <h2 className="form__header-title">
-                    {toggle ? 'Đăng nhập' : 'Đăng ký'}
+                    {toggle ? 'Sign In' : 'Sign Up'}
                 </h2>
             </div>
             <div className="form-body">
@@ -150,25 +166,25 @@ const UserModal: React.FC = () => {
               <>
                 <div className="form-action">
                   <FontAwesomeIcon className='icon' icon={faUser}/>
-                  <input type="text" placeholder='Tên đăng nhập' />
+                  <input type="text" placeholder='Username' />
                 </div>
                 <div className="form-action">
                   <FontAwesomeIcon className='icon' icon={faLock}/>
-                  <input type="text" placeholder='Mật khẩu' />
+                  <input type="text" placeholder='Password' />
                 </div>
                 <button className="btn btn-form">
-                  Đăng nhập
+                  Login
                 </button>
               </>
                : 
               <>
                 <div className="form-action">
                   <FontAwesomeIcon className='icon' icon={faUser}/>
-                  <input type="text" placeholder='Tên đăng nhập' />
+                  <input type="text" placeholder='Username' />
                 </div>
                 <div className="form-action">
                   <FontAwesomeIcon className='icon' icon={faLock}/>
-                  <input type="text" placeholder='Mật khẩu' />
+                  <input type="text" placeholder='Password' />
                 </div>
                 <div className="form-action">
                   <FontAwesomeIcon className='icon' icon={faEnvelope}/>
@@ -183,7 +199,7 @@ const UserModal: React.FC = () => {
             </div>
             <div className="form-footer">
               <p>Đã có tài khoản? <span onClick={() => setToggle(!toggle)}>
-                {toggle ? 'Đăng nhập' : 'Đăng ký'}
+                {toggle ? 'Sign In' : 'Sign Up'}
                 </span></p>
             </div>
         </FormContainer>

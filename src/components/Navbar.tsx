@@ -1,5 +1,7 @@
 import styled from "styled-components"
 import { NavLink, useLocation } from "react-router-dom"
+import { SearchOutlined } from "@ant-design/icons"
+import UserModal from "./UserModal"
 
 const Container = styled.div`
     width: 100%;
@@ -26,7 +28,11 @@ const SearchBar = styled.div`
         width: 22px;
         height: 22px;
         border-radius: 50%;
-        background: red;
+        font-size: 1.5em;
+        line-height: 1.5em;
+        display: flex;
+        align-items: center;
+        margin-left: 0.2rem;
     }
 `
 
@@ -47,7 +53,7 @@ const Logo = styled.div`
         line-height: 18px;
         text-align: left;
         color: #ffffff;
-        margin-top: 16px
+        margin-left: 16px
     }
 `
 
@@ -82,9 +88,9 @@ const NavLists = styled.ul`
 `
 
 const links = [
-    {name: "Home", path: "/", status: "active"},
-    {name: "Browse", path: "/browse", status: "active"},
-    {name: "Radio", path: "/radio", status: "active"},
+    {name: "Home", path: "/"},
+    {name: "Browse", path: "/browse"},
+    {name: "Radio", path: "/radio"},
 ]
 
 
@@ -95,7 +101,7 @@ export default function Navbar() {
     return <Container>
         <SearchBar>
             <span className="search-icon">
-                        
+                <SearchOutlined />
             </span>
         </SearchBar>
         <NavLists>
@@ -112,6 +118,9 @@ export default function Navbar() {
             <div className="logo-img"></div>
             <p className="label-fullname">Admin</p>
         </Logo>
+
+        <UserModal/>
+
         
     </Container>
 }

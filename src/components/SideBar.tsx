@@ -1,7 +1,6 @@
 import styled from "styled-components"
 import { NavLink } from "react-router-dom"
 import IconNewPlaylist from "./../assets/new-playlist.svg"
-import UserModal from "./UserModal"
 
 const Container = styled.div`
     width: 16.4%;
@@ -130,7 +129,6 @@ export default function Sidebar() {
                 <p className="label-fullname">iSound</p>
                 <p className="label-account">@admin</p>
             </Logo>
-            <UserModal/>
 
             <NavLists>
                 {links.map((link,index) => (
