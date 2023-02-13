@@ -16,7 +16,6 @@ const Player = styled.div`
     position: fixed;
     bottom: 0;
     width: 100vw;
-    height: 10%;
     min-height: 80px;
     background: #797979;
 `
