@@ -14,3 +14,8 @@ html {
 button.ant-btn.css-dev-only-do-not-override-j0nf2s.ant-btn-default {
     display: none;
 }
+
+.ant-modal-close-x {
+    color: #e9003f !important;
+    font-size: 1.345rem !important;
+}
