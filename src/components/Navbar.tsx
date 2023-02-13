@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { NavLink, useLocation } from "react-router-dom"
 import { SearchOutlined } from "@ant-design/icons"
 import UserModal from "./UserModal"
+import { Input } from "antd"
 
 const Container = styled.div`
     width: 100%;
@@ -11,31 +12,6 @@ const Container = styled.div`
     padding: 0 55px;
 `
 
-const SearchBar = styled.div`
-    position: relative;
-    padding-left: 12px;
-    margin-right: 138px;
-    display: flex;
-    align-items: center;
-    width: 37.94%;
-    height: 61px;
-    border-color: #ffffff;
-    border-width: 2px;
-    border-style: solid;
-    border-radius: 38px;
-    & .search-icon {
-        position: absolute;
-        width: 22px;
-        height: 22px;
-        border-radius: 50%;
-        font-size: 1.5em;
-        line-height: 1.5em;
-        display: flex;
-        align-items: center;
-        margin-left: 0.2rem;
-    }
-`
-
 const Logo = styled.div`
     width: 212px;
     margin-left: 100px;
@@ -43,48 +19,91 @@ const Logo = styled.div`
     align-items: center;
     justify-content: center;
     .logo-img {
-        width: 50px;
-        height: 50px;
+        width: 3rem;
+        height: 3rem;
         background: #ffffff;
         border-radius: 50%;
     }
     .label-fullname {
-        font-size: 18px;
-        line-height: 18px;
+        font-size: 1.1rem;
+        line-height: 1.1rem;
         text-align: left;
         color: #ffffff;
         margin-left: 16px
     }
 `
 
-const NavLists = styled.ul`
-  display: flex;
+const SearchInput = styled(Input)`
+    height: 3.2rem;
+    background: #141414;
+    border-radius: 1.5rem;
+    border: 1.8px solid #ffffff;
+    width: 50%;
+    margin-right: 5rem;
+    display: flex;
+    align-items: center;
 
-  a {
-    text-decoration: none;
+    &.ant-input-affix-wrapper:hover {
+        border-color: #ffffff;
+    }
 
-  }
-
-  li {
-    font-size: 20px;
-    line-height: 20px;
-    color: #e3dede;
-    list-style: none;
-    text-align: left;
-    letter-spacing: 3px;
-    margin-left: 46px;
-
+    .ant-input-prefix {
+        color: #ffffff;
+        font-size: 1.2rem;
+        margin: 0 16px 0 8px;
+    }
     
-    &.active {
-    color: #e9003f;
-  }
-  }
+    .ant-input {
+        background: #141414;
+        color: #ffffff;
+        font-size: 1rem !important;
+    }
 
-  li:hover {
-    color: #e9003f;
-  }
+    .ant-input::placeholder {
+        color: #ffffff;
+        opacity: 0.75;
+    }
+`
 
-  
+const NavLists = styled.ul`
+    display: flex;
+
+    a {
+        text-decoration: none;
+    }
+
+    li {
+        font-size: 1.2rem;
+        line-height: 1.2rem;
+        color: #e3dede;
+        list-style: none;
+        text-align: left;
+        letter-spacing: 3px;
+        margin-left: 46px;
+        position: relative;
+    }
+
+    li:hover {
+        color: #e9003f;
+    }
+
+    li.active {
+        color: #e9003f;
+    }
+      
+    li:after {
+        content: "";
+        width: 20px;
+        height: 2px;
+        position: absolute;
+        background: #141414;
+        bottom: -4px;
+        left: 0;
+    }
+
+    li.active:after {
+        background: #e9003f;
+    }
 `
 
 const links = [
@@ -99,11 +118,7 @@ export default function Navbar() {
     const location = useLocation()
 
     return <Container>
-        <SearchBar>
-            <span className="search-icon">
-                <SearchOutlined />
-            </span>
-        </SearchBar>
+        <SearchInput placeholder="Type song, arstist and playlist" prefix={<SearchOutlined />} />
         <NavLists>
             {links.map((link,index) => (
                 <NavLink

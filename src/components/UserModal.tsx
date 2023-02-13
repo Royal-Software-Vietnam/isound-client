@@ -146,6 +146,7 @@ const UserModal: React.FC = () => {
         Login
       </LoginButton>
       <Modal
+        onCancel={() => setOpen(false)}
         centered
         open={open}
         width={1000}
@@ -163,42 +164,42 @@ const UserModal: React.FC = () => {
             </div>
             <div className="form-body">
               {toggle ? 
-              <>
-                <div className="form-action">
-                  <FontAwesomeIcon className='icon' icon={faUser}/>
-                  <input type="text" placeholder='Username' />
-                </div>
-                <div className="form-action">
-                  <FontAwesomeIcon className='icon' icon={faLock}/>
-                  <input type="text" placeholder='Password' />
-                </div>
-                <button className="btn btn-form">
-                  Login
-                </button>
-              </>
+                <>
+                  <div className="form-action">
+                    <FontAwesomeIcon className='icon' icon={faUser}/>
+                    <input type="text" placeholder='Username' />
+                  </div>
+                  <div className="form-action">
+                    <FontAwesomeIcon className='icon' icon={faLock}/>
+                    <input type="text" placeholder='Password' />
+                  </div>
+                  <button className="btn btn-form">
+                    Login
+                  </button>
+                </>
                : 
-              <>
-                <div className="form-action">
-                  <FontAwesomeIcon className='icon' icon={faUser}/>
-                  <input type="text" placeholder='Username' />
-                </div>
-                <div className="form-action">
-                  <FontAwesomeIcon className='icon' icon={faLock}/>
-                  <input type="text" placeholder='Password' />
-                </div>
-                <div className="form-action">
-                  <FontAwesomeIcon className='icon' icon={faEnvelope}/>
-                  <input type="text" placeholder='Email' />
-                </div>
-                <button className="btn btn-form">
-                  Đăng ký
-                </button>
-              </>
+                <>
+                  <div className="form-action">
+                    <FontAwesomeIcon className='icon' icon={faUser}/>
+                    <input type="text" placeholder='Username' />
+                  </div>
+                  <div className="form-action">
+                    <FontAwesomeIcon className='icon' icon={faLock}/>
+                    <input type="text" placeholder='Password' />
+                  </div>
+                  <div className="form-action">
+                    <FontAwesomeIcon className='icon' icon={faEnvelope}/>
+                    <input type="text" placeholder='Email' />
+                  </div>
+                  <button className="btn btn-form">
+                    Sign Up
+                  </button>
+                </>
               }
               
             </div>
             <div className="form-footer">
-              <p>Đã có tài khoản? <span onClick={() => setToggle(!toggle)}>
+              <p>{toggle ? 'Not a member?' : 'Already have account?'} <span onClick={() => setToggle(!toggle)}>
                 {toggle ? 'Sign In' : 'Sign Up'}
                 </span></p>
             </div>
