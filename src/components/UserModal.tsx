@@ -146,6 +146,9 @@ const LoginModalBtn = styled(Button)`
 const UserModal: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [toggle, setToggle] = useState(false)
+  useEffect(() => {
+    open === false && setToggle(false)
+  }, [open])
 
   return (
     <>
@@ -167,7 +170,7 @@ const UserModal: React.FC = () => {
                       ISOUND
                   </h1>
                   <h2 className="form__header-title">
-                      {toggle ? 'Sign In' : 'Sign Up'}
+                      {toggle ? 'Sign Up' : 'Sign In'}
                   </h2>
               </div>
               <div className="form-body">
@@ -179,8 +182,11 @@ const UserModal: React.FC = () => {
                     <div className="form-action">
                       <InputAntd placeholder='Password' prefix={<LockOutlined/>}/>
                     </div>
+                    <div className="form-action">
+                      <InputAntd placeholder='Email' prefix={<MailOutlined/>}/>
+                    </div>
                     <FormBtn type='primary'>
-                      Login
+                      Sign up
                     </FormBtn>
                   </>
                 : 
@@ -191,19 +197,16 @@ const UserModal: React.FC = () => {
                     <div className="form-action">
                       <InputAntd placeholder='Password' prefix={<LockOutlined/>}/>
                     </div>
-                    <div className="form-action">
-                      <InputAntd placeholder='Email' prefix={<MailOutlined/>}/>
-                    </div>
-                  <FormBtn type='primary'>
-                      Sign up
+                    <FormBtn type='primary'>
+                      Login
                     </FormBtn>
                   </>
                 }
                 
               </div>
               <div className="form-footer">
-                <p>{toggle ? 'Not a member?' : 'Already have account?'} <span onClick={() => setToggle(!toggle)}>
-                  {toggle ? 'Sign Up' : 'Sign In'}
+                <p>{toggle ?  'Already have account?' : 'Not a member?'} <span onClick={() => setToggle(!toggle)}>
+                  {toggle ? 'Sign In' : 'Sign Up'}
                   </span></p>
               </div>
           </FormContainer>
