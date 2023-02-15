@@ -1,6 +1,10 @@
 import axios, {AxiosRequestConfig, AxiosResponse, AxiosInstance} from "axios";
 
-const AXIOS_SERVICE = (url:string) => {
+const BASIC_SERVICE = (url:string) => {
+    const axiosInstance:AxiosInstance = axios.create({ baseURL: url })
+    return axiosInstance
+}
+const USER_SERVICE = (url:string) => {
     const axiosInstance:AxiosInstance = axios.create({ baseURL: url })
     // @ts-ignore
     axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
@@ -35,10 +39,19 @@ const AXIOS_SERVICE = (url:string) => {
     return axiosInstance
 }
 
-const service = AXIOS_SERVICE("http://localhost:8888")
+const userService = USER_SERVICE("http://localhost:8888")
+const basicService = BASIC_SERVICE("http://localhost:8888")
 
 export const getCurrentUser = async () => await axios.get("http://localhost:8888/user-profile", { headers: {} })
 
 export const addToFavoriteList = (favorite_list_id:string, audio_id:string) => {
-    return service.put(`/favorite/${favorite_list_id}`, { audio_id })
+    return userService.put(`/favorite/${favorite_list_id}`, { audio_id })
+}
+
+export const signin = ({ username, password }:{ username:string, password:string }) => {
+    return basicService.post('/user/signin', { username, password })
+}
+
+export const signup = ({ username, password, email }:{ username:string, password:string, email:string }) => {
+    return basicService.post('/user/signup', { username, password, email })
 }

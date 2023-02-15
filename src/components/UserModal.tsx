@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Input, Modal } from 'antd';
+import { Form, Button, Input, Modal, message } from 'antd';
 import styled from 'styled-components';
 import '../assets/GlobalStyles.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEnvelope, faUser } from '@fortawesome/free-regular-svg-icons';
-import { faLock } from '@fortawesome/free-solid-svg-icons';
 import LoginBackground from "./../assets/login-bc.jpg"
 import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
+import { signin, signup } from '../services';
+import { useApp } from '../context';
 
 const Container = styled.div`
   width: 100%;
@@ -107,7 +106,7 @@ const InputAntd = styled(Input)`
   }
 `
 
-const FormBtn= styled(Button)`
+const FormBtn = styled(Button)`
     width: 85%;
     margin-top: 4px;
     padding: 5px 0;
@@ -143,15 +142,42 @@ const LoginModalBtn = styled(Button)`
   }
 `
 
+type MessageType = 'success' | 'info' | 'warning' | 'error';
+
 const UserModal: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [toggle, setToggle] = useState(false)
+  const [form] = Form.useForm()
+  const {setUser, user, setLoading} = useApp()
+  const [messageApi, contextHolder] = message.useMessage()
+
+  const openMessage = (type: MessageType, content:string) => {
+    messageApi.open({
+      type: type,
+      content: content,
+    });
+  };
+
+  const handleSign = async (values:any) => {
+    setLoading(true)
+    try {
+      let { data } = await signup({ username: values.username, password: values.password, email: values.email })
+      // Close modal and save token
+      setLoading(false)
+    } catch (error) {
+      openMessage('error', 'Không thể đăng ký')
+      // Close modal and save token
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
     open === false && setToggle(false)
   }, [open])
 
   return (
     <>
+      {contextHolder}
       <LoginModalBtn type="primary" onClick={() => setOpen(true)}>
         Login
       </LoginModalBtn>
@@ -164,51 +190,58 @@ const UserModal: React.FC = () => {
       >
         {/* <Image className={toggle ? 'active' : ''}/> */}
         <Container>
-            <FormContainer  className={toggle ? 'active' : ''}>
-              <div className={"form__header"}>
-                  <h1 className="form__header-name">
-                      ISOUND
-                  </h1>
-                  <h2 className="form__header-title">
-                      {toggle ? 'Sign Up' : 'Sign In'}
-                  </h2>
-              </div>
+          <FormContainer className={toggle ? 'active' : ''}>
+            <div className={"form__header"}>
+              <h1 className="form__header-name">
+                ISOUND
+              </h1>
+              <h2 className="form__header-title">
+                {toggle ? 'Sign Up' : 'Sign In'}
+              </h2>
+            </div>
+            <Form form={form} onFinish={handleSign}>
               <div className="form-body">
-                {toggle ? 
+                {toggle ?
                   <>
                     <div className="form-action">
-                      <InputAntd placeholder='Username' prefix={<UserOutlined/>}/>
+                      <Form.Item required name="username" style={{width:'100%'}}>
+                        <InputAntd placeholder='Username' prefix={<UserOutlined />} />
+                      </Form.Item>
                     </div>
                     <div className="form-action">
-                      <InputAntd placeholder='Password' prefix={<LockOutlined/>}/>
+                      <Form.Item required name="password" style={{width:'100%'}}>
+                        <InputAntd placeholder='Password'prefix={<LockOutlined />} />
+                      </Form.Item>
                     </div>
                     <div className="form-action">
-                      <InputAntd placeholder='Email' prefix={<MailOutlined/>}/>
+                      <Form.Item required name="email" style={{width:'100%'}}>
+                        <InputAntd placeholder='Email' prefix={<MailOutlined />} />
+                      </Form.Item>
                     </div>
-                    <FormBtn type='primary'>
+                    <FormBtn type='primary' htmlType="submit">
                       Sign up
                     </FormBtn>
                   </>
-                : 
+                  :
                   <>
                     <div className="form-action">
-                      <InputAntd placeholder='Username' prefix={<UserOutlined/>}/>
+                      <InputAntd placeholder='Username' prefix={<UserOutlined />} />
                     </div>
                     <div className="form-action">
-                      <InputAntd placeholder='Password' prefix={<LockOutlined/>}/>
+                      <InputAntd placeholder='Password' prefix={<LockOutlined />} />
                     </div>
                     <FormBtn type='primary'>
                       Login
                     </FormBtn>
                   </>
                 }
-                
               </div>
-              <div className="form-footer">
-                <p>{toggle ?  'Already have account?' : 'Not a member?'} <span onClick={() => setToggle(!toggle)}>
-                  {toggle ? 'Sign In' : 'Sign Up'}
-                  </span></p>
-              </div>
+            </Form>
+            <div className="form-footer">
+              <p>{toggle ? 'Already have account?' : 'Not a member?'} <span onClick={() => setToggle(!toggle)}>
+                {toggle ? 'Sign In' : 'Sign Up'}
+              </span></p>
+            </div>
           </FormContainer>
         </Container>
       </Modal>

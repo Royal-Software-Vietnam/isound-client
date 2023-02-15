@@ -7,7 +7,7 @@ const antIcon = <LoadingOutlined style={{fontSize: 32}} spin/>;
 
 const Container = styled.div`
   position: fixed;
-  z-index: 99;
+  z-index: 9999;
   top: 0;
   left: 0;
   display: flex;
