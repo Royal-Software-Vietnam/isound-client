@@ -148,25 +148,33 @@ const UserModal: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [toggle, setToggle] = useState(false)
   const [form] = Form.useForm()
-  const {setUser, user, setLoading} = useApp()
+  const { setUser, user, setLoading } = useApp()
   const [messageApi, contextHolder] = message.useMessage()
 
-  const openMessage = (type: MessageType, content:string) => {
+  const openMessage = (type: MessageType, content: string) => {
     messageApi.open({
       type: type,
       content: content,
     });
   };
 
-  const handleSign = async (values:any) => {
+  const handleSign = async (values: any) => {
     setLoading(true)
     try {
-      let { data } = await signup({ username: values.username, password: values.password, email: values.email })
-      // Close modal and save token
+      if (toggle) {
+        let { data } = await signup({ username: values.username, password: values.password, email: values.email })
+        /* @ts-ignore */
+        localStorage.setItem('auth', JSON.stringify(data))
+      } else {
+        let { data } = await signin({ username: values.username, password: values.password })
+        /* @ts-ignore */
+        localStorage.setItem('auth', JSON.stringify(data))
+      }
+      setOpen(false)
       setLoading(false)
     } catch (error) {
       openMessage('error', 'Không thể đăng ký')
-      // Close modal and save token
+      setOpen(false)
       setLoading(false)
     }
   }
@@ -204,17 +212,17 @@ const UserModal: React.FC = () => {
                 {toggle ?
                   <>
                     <div className="form-action">
-                      <Form.Item required name="username" style={{width:'100%'}}>
+                      <Form.Item required name="username" style={{ width: '100%' }}>
                         <InputAntd placeholder='Username' prefix={<UserOutlined />} />
                       </Form.Item>
                     </div>
                     <div className="form-action">
-                      <Form.Item required name="password" style={{width:'100%'}}>
-                        <InputAntd placeholder='Password'prefix={<LockOutlined />} />
+                      <Form.Item required name="password" style={{ width: '100%' }}>
+                        <InputAntd placeholder='Password' prefix={<LockOutlined />} />
                       </Form.Item>
                     </div>
                     <div className="form-action">
-                      <Form.Item required name="email" style={{width:'100%'}}>
+                      <Form.Item required name="email" style={{ width: '100%' }}>
                         <InputAntd placeholder='Email' prefix={<MailOutlined />} />
                       </Form.Item>
                     </div>
@@ -225,12 +233,16 @@ const UserModal: React.FC = () => {
                   :
                   <>
                     <div className="form-action">
-                      <InputAntd placeholder='Username' prefix={<UserOutlined />} />
+                      <Form.Item required name="username" style={{ width: '100%' }}>
+                        <InputAntd placeholder='Username' prefix={<UserOutlined />} />
+                      </Form.Item>
                     </div>
                     <div className="form-action">
-                      <InputAntd placeholder='Password' prefix={<LockOutlined />} />
+                      <Form.Item required name="password" style={{ width: '100%' }}>
+                        <InputAntd placeholder='Password' prefix={<LockOutlined />} />
+                      </Form.Item>
                     </div>
-                    <FormBtn type='primary'>
+                    <FormBtn type='primary' htmlType="submit">
                       Login
                     </FormBtn>
                   </>

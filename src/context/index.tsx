@@ -11,14 +11,17 @@ const App = React.createContext<{
 export default function AppProvider ({children}:{children:React.ReactNode}) {
     const [user, $user] = useState<any>(null)
     const [ready, $ready] = useState<boolean>(true)
-    const [loading, $loading] = useState<boolean>(false)
+    const [loading, $loading] = useState<boolean>(true)
 
     useEffect(() => {
         const run = async () => {
             // checking user:
-            // const currentUser = await getCurrentUser()
-            // $user(currentUser.data)
-        }; run().finally(() => $ready(true))
+            const currentUser = await getCurrentUser()
+            $user(currentUser.data)
+        }; run().finally(() => {
+            $loading(false)
+            $ready(true)
+        })
     }, [])
 
     return <App.Provider value={{user, setUser:$user, setLoading: $loading}}>

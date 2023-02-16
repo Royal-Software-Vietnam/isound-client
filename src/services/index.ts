@@ -42,7 +42,14 @@ const USER_SERVICE = (url:string) => {
 const userService = USER_SERVICE("http://localhost:8888")
 const basicService = BASIC_SERVICE("http://localhost:8888")
 
-export const getCurrentUser = async () => await axios.get("http://localhost:8888/user-profile", { headers: {} })
+export const getCurrentUser = () => {
+    /* @ts-ignore */
+    let { token }:any = JSON.parse(localStorage.getItem('auth'))
+
+    return axios.get("http://localhost:8888/user/profile", { headers: {
+    token: token || 'empty'
+} })
+}
 
 export const addToFavoriteList = (favorite_list_id:string, audio_id:string) => {
     return userService.put(`/favorite/${favorite_list_id}`, { audio_id })
