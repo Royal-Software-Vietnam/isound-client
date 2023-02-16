@@ -1,5 +1,9 @@
 import { Typography } from "antd";
 import styled from "styled-components";
+import box1 from "../../assets/box-1.png";
+import box2 from "../../assets/box-2.png";
+import box3 from "../../assets/box-3.png";
+import box4 from "../../assets/box-4.png";
 
 const Container = styled.div`
     background: #141414;
@@ -28,15 +32,25 @@ const List = styled.div`
     margin: 0 -8px;
 `
 const Box = styled.div`
-    width: 14rem;
-    height: 9.5rem;
+    width: 12rem;
+    height: 10rem;
     padding: 8px;
 
     .box-img {
-        background: #e9003f;
+        background-position: center;
+        background-image:
+            linear-gradient(
+                to right, #e6101033, #e9003f33
+            ),
+            url(${box1});
         width: 100%;
         height: 100%;
         border-radius: 0.4rem;
+    }
+
+    .box-img:hover {
+        cursor: pointer;
+        opacity: 0.8;
     }
 `
 
