@@ -1,5 +1,5 @@
 import { Typography } from "antd";
-import { CaretRightOutlined } from "@ant-design/icons"
+import { CaretRightOutlined, PauseOutlined } from "@ant-design/icons"
 import styled from "styled-components";
 import box1 from "../../assets/box-1.png";
 import HeartIcon from "../../assets/likeheart.svg"
@@ -43,6 +43,10 @@ const Box = styled.div`
         font-size: 1.5rem;
         color: #cbcbcb;
         margin-right: 1.5rem;
+    }
+
+    .anticon:hover {
+        cursor: pointer;
     }
 
     .box-img {
@@ -90,11 +94,23 @@ const Box = styled.div`
 `
 
 const boxes = [
-    {author: "Moroon5", songname: "Memories", time: "3:45"},
-    {author: "Jeremy Zucker", songname: "Comethru", time: "3:45"},
-    {author: "Lauv", songname: "I'm So Tired", time: "3:45"},
-    {author: "Andy Grammer", songname: "Don't Give Up On Me", time: "3:45"},
+    {author: "Moroon5", songname: "Memories", time: "3:45", status: 0},
+    {author: "Jeremy Zucker", songname: "Comethru", time: "3:45", status: 0},
+    {author: "Lauv", songname: "I'm So Tired", time: "3:45", status: 0},
+    {author: "Andy Grammer", songname: "Don't Give Up On Me", time: "3:45", status: 0},
 ]
+
+const handlePause = (index: any) => {
+    boxes.forEach(item => {
+        if(item.status == 1) {
+            item.status = 0;
+        }
+        console.log(item.status)
+    })
+    boxes[index].status = 1;
+    console.log(index)
+    console.log(boxes[index].status);
+}
 
 export default function ListPlayed () {
     return <Container>
@@ -103,7 +119,9 @@ export default function ListPlayed () {
         <List>
             {boxes.map((box, index) => (
                 <Box key={index}>
-                    <CaretRightOutlined />
+                    <span onClick={() => handlePause(index)}>
+                        { box.status === 0 ? <CaretRightOutlined /> : <PauseOutlined />}
+                    </span>
                     <div className="box-img"></div>
                     <div className="song-info">
                         <p>{box.author}</p>
