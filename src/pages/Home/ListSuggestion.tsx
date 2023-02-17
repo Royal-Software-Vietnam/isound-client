@@ -32,7 +32,7 @@ const List = styled.div`
     margin: 0 -8px;
 `
 const Box = styled.div`
-    width: 12rem;
+    width: 13rem;
     height: 10rem;
     padding: 8px;
 
