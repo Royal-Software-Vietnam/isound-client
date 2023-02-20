@@ -126,7 +126,7 @@ const links = [
   {name: "Galaxy - Bolbbalgan", path: "/galaxy", type: "secondary"},
 ]
 
-export default function Sidebar() {
+export default function SideBar() {
     return <Container>
             <Logo>
                 <div className="logo-img"></div>

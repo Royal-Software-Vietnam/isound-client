@@ -6,25 +6,29 @@ const App = React.createContext<{
     user?: any,
     setUser?: any,
     setLoading?: any,
+    voiceSearch?: any,
+    setVoiceSearch?: any
 }>({})
 
 export default function AppProvider ({children}:{children:React.ReactNode}) {
-    const [user, $user] = useState<any>(null)
-    const [ready, $ready] = useState<boolean>(true)
-    const [loading, $loading] = useState<boolean>(true)
+    const [user, setUser] = useState<any>(null)
+    const [ready, setReady] = useState<boolean>(true)
+    const [loading, setLoading] = useState<boolean>(true)
+    const [voiceSearch, setVoiceSearch] = useState<boolean>(false) 
 
     useEffect(() => {
         const run = async () => {
             // checking user:
             const currentUser = await getCurrentUser()
-            $user(currentUser.data)
+            setUser(currentUser.data)
         }; run().finally(() => {
-            $loading(false)
-            $ready(true)
+            setLoading(false)
+            setReady(true)
         })
     }, [])
 
-    return <App.Provider value={{user, setUser:$user, setLoading: $loading}}>
+    return <App.Provider 
+        value={{user, setUser, setLoading, voiceSearch, setVoiceSearch}}>
         { ready ? children:null }
         {loading ? <Loading/> : null}
     </App.Provider>

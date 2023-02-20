@@ -1,8 +1,11 @@
 import styled from "styled-components"
 import { NavLink, useLocation } from "react-router-dom"
-import { SearchOutlined } from "@ant-design/icons"
+import { SearchOutlined, AudioOutlined } from "@ant-design/icons"
 import UserModal from "./UserModal"
-import { Input } from "antd"
+import { Input, message } from "antd"
+import { useApp } from "../context"
+import { useState, useEffect } from "react"
+import useSpeechToText from 'react-hook-speech-to-text';
 
 const Container = styled.div`
     width: 100%;
@@ -51,6 +54,13 @@ const SearchInput = styled(Input)`
         color: #ffffff;
         font-size: 1.2rem;
         margin: 0 16px 0 8px;
+    }
+
+    .ant-input-suffix {
+        color: #ffffff;
+        font-size: 1.2rem;
+        cursor: pointer;
+        margin: 0 8px 0 8px;
     }
     
     .ant-input {
@@ -114,11 +124,43 @@ const links = [
 
 
 
-export default function Navbar() {
+export default function NavBar() {
     const location = useLocation()
+    const [messageApi, contextHolder] = message.useMessage()
+    const {
+        error,
+        interimResult,
+        isRecording,
+        results,
+        startSpeechToText,
+        stopSpeechToText,
+      } = useSpeechToText({
+        continuous: true,
+        useLegacyResults: false
+    })
+
+    if (error) { console.warn(`Web Speech API is not available in this browser`) }
+    type MessageType = 'success' | 'info' | 'warning' | 'error';
+    const openMessage = (type: MessageType, content: string) => {
+        messageApi.open({
+          type: type,
+          content: content,
+        });
+      };
+    
+    useEffect(() => {
+        /* @ts-ignore */
+        console.log(results[results.length - 1]?.transcript)
+        /* @ts-ignore */
+        results?.length > 0 && openMessage('info', results[results.length - 1]?.transcript)
+    }, [results])
+    
 
     return <Container>
-        <SearchInput placeholder="Type song, arstist and playlist" prefix={<SearchOutlined />} />
+        {contextHolder}
+        <SearchInput placeholder="Type song, arstist and playlist"
+        suffix={<AudioOutlined onClick={isRecording ? stopSpeechToText : startSpeechToText} style={{color:isRecording?"red":"white"}}/>} 
+        prefix={<SearchOutlined />} />
         <NavLists>
             {links.map((link,index) => (
                 <NavLink
@@ -131,7 +173,7 @@ export default function Navbar() {
         </NavLists>
         <Logo>
             <div className="logo-img"></div>
-            <p className="label-fullname">Admin</p>
+            <p className="label-fullname">Guess</p>
         </Logo>
 
         <UserModal/>

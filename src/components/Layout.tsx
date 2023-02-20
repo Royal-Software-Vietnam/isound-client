@@ -1,6 +1,8 @@
 import styled from "styled-components"
-import Sidebar from "./Sidebar"
-import Navbar from "./Navbar"
+import Sidebar from "./SideBar"
+import NavBar from "./NavBar"
+import { useApp } from "../context"
+import Voice from "./Voice"
 
 const Main = styled.div`
     width: 100%;
@@ -20,15 +22,20 @@ const Player = styled.div`
     background: #797979;
 `
 
+
 interface iLayoutProps {
     children: React.ReactElement
 }
 
 export default function Layout({ children }: iLayoutProps) {
+
+    const { voiceSearch, setVoiceSearch } = useApp()
+
     return <Main>
+        {voiceSearch && <Voice setVoiceSearch={setVoiceSearch}/>}
         <Sidebar />
         <RightSide>
-            <Navbar />
+            <NavBar />
             {children}
         </RightSide>
         <Player />
