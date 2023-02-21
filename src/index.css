@@ -20,3 +20,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+.react-jinke-music-player-main {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+}

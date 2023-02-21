@@ -3,6 +3,7 @@ import Sidebar from "./SideBar"
 import NavBar from "./NavBar"
 import { useApp } from "../context"
 import Voice from "./Voice"
+import Player from "./Player"
 
 const Main = styled.div`
     width: 100%;
@@ -12,14 +13,6 @@ const Main = styled.div`
 
 const RightSide = styled.div`
     width: calc(100% - 16.46%);
-`
-
-const Player = styled.div`
-    position: fixed;
-    bottom: 0;
-    width: 100vw;
-    min-height: 80px;
-    background: #797979;
 `
 
 
