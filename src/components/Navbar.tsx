@@ -140,6 +140,8 @@ export default function NavBar() {
         useLegacyResults: false
     })
 
+    const { user } = useApp()
+
     if (error) { console.warn(`Web Speech API is not available in this browser`) }
     type MessageType = 'success' | 'info' | 'warning' | 'error';
     const openMessage = (type: MessageType, content: string) => {
@@ -174,7 +176,7 @@ export default function NavBar() {
         </NavLists>
         <Logo>
             <div className="logo-img"></div>
-            <p className="label-fullname">Guess</p>
+            { user?.user_name && <p className="label-fullname">{user.user_name}</p> }
         </Logo>
 
         <UserModal/>

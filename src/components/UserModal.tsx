@@ -166,14 +166,14 @@ const UserModal: React.FC = () => {
         /* @ts-ignore */
         localStorage.setItem('auth', JSON.stringify(data))
       } else {
-        let { data } = await signin({ username: values.username, password: values.password })
+        let { data } = await signin({ email: values.email, password: values.password })
         /* @ts-ignore */
         localStorage.setItem('auth', JSON.stringify(data))
       }
       setOpen(false)
       setLoading(false)
     } catch (error) {
-      openMessage('error', 'Không thể đăng ký')
+      openMessage('error', 'Failed')
       setOpen(false)
       setLoading(false)
     }
@@ -233,8 +233,8 @@ const UserModal: React.FC = () => {
                   :
                   <>
                     <div className="form-action">
-                      <Form.Item required name="username" style={{ width: '100%' }}>
-                        <InputAntd placeholder='Username' prefix={<UserOutlined />} />
+                      <Form.Item required name="email" style={{ width: '100%' }}>
+                        <InputAntd placeholder='Email' prefix={<UserOutlined />} />
                       </Form.Item>
                     </div>
                     <div className="form-action">

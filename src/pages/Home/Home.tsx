@@ -3,6 +3,7 @@ import ListPlayed from "./ListPlayed"
 import ListSuggestion from "./ListSuggestion"
 import Slider from "./Slider"
 
+
 const HomeLayout = styled.div`
     height: 70%;
 `

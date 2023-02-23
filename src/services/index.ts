@@ -44,10 +44,10 @@ const basicService = BASIC_SERVICE("http://localhost:8888")
 
 export const getCurrentUser = () => {
     /* @ts-ignore */
-    let { token }:any = JSON.parse(localStorage.getItem('auth'))
+    let { accessToken }:any = JSON.parse(localStorage.getItem('auth'))
 
     return axios.get("http://localhost:8888/user/profile", { headers: {
-    token: token || 'empty'
+        access_token: accessToken || 'empty'
 } })
 }
 
@@ -55,10 +55,18 @@ export const addToFavoriteList = (favorite_list_id:string, audio_id:string) => {
     return userService.put(`/favorite/${favorite_list_id}`, { audio_id })
 }
 
-export const signin = ({ username, password }:{ username:string, password:string }) => {
-    return basicService.post('/user/signin', { username, password })
+export const signin = ({ email, password }:{ email:string, password:string }) => {
+    return basicService.post('/user/signin', { email, password })
 }
 
 export const signup = ({ username, password, email }:{ username:string, password:string, email:string }) => {
     return basicService.post('/user/signup', { username, password, email })
+}
+
+export const search = (keyword:string) => {
+    return basicService.get("/audio/search", {
+        params: {
+            keyword
+        }
+    })
 }
