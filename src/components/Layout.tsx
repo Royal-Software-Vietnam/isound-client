@@ -1,9 +1,7 @@
 import styled from "styled-components"
-import Sidebar from "./SideBar"
-import NavBar from "./NavBar"
+import { Player, NavBar, SideBar } from "./Theme"
 import { useApp } from "../context"
 import Voice from "./Voice"
-import Player from "./Player"
 
 const Main = styled.div`
     width: 100%;
@@ -26,7 +24,7 @@ export default function Layout({ children }: iLayoutProps) {
 
     return <Main>
         {voiceSearch && <Voice setVoiceSearch={setVoiceSearch}/>}
-        <Sidebar />
+        <SideBar />
         <RightSide>
             <NavBar />
             {children}

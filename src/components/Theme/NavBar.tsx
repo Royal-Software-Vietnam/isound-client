@@ -1,7 +1,8 @@
 import styled from "styled-components"
 import { NavLink, useLocation } from "react-router-dom"
+import { useApp } from "../../context"
 import { SearchOutlined } from "@ant-design/icons"
-import UserModal from "./UserModal"
+import UserModal from "../UserModal"
 import { Input } from "antd"
 
 const Container = styled.div`
@@ -107,35 +108,36 @@ const NavLists = styled.ul`
 `
 
 const links = [
-    {name: "Home", path: "/"},
-    {name: "Browse", path: "/browse"},
-    {name: "Radio", path: "/radio"},
+    { name: "Home", path: "/" },
+    { name: "Browse", path: "/browse" },
+    { name: "Radio", path: "/radio" },
 ]
 
 
 
-export default function Navbar() {
+export default function NavBar() {
     const location = useLocation()
-
+    const { user } = useApp()
     return <Container>
         <SearchInput placeholder="Type song, arstist and playlist" prefix={<SearchOutlined />} />
         <NavLists>
-            {links.map((link,index) => (
+            {links.map((link, index) => (
                 <NavLink
                     key={index}
                     to={link.path}
-                    >
+                >
                     <li className={location.pathname === link.path ? 'active' : ""}>{link.name}</li>
                 </NavLink>
             ))}
         </NavLists>
-        <Logo>
+
+        { user && <Logo>
             <div className="logo-img"></div>
-            <p className="label-fullname">Admin</p>
-        </Logo>
+            <p className="label-fullname">{ user.user_name }</p>
+        </Logo>}
 
-        <UserModal/>
+        <UserModal />
 
-        
+
     </Container>
 }

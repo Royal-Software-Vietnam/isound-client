@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import { NavLink } from "react-router-dom"
-import IconNewPlaylist from "./../assets/new-playlist.svg"
+import IconNewPlaylist from "../../assets/new-playlist.svg"
 
 const Container = styled.div`
     width: 16.4%;
@@ -126,7 +126,7 @@ const links = [
   {name: "Galaxy - Bolbbalgan", path: "/galaxy", type: "secondary"},
 ]
 
-export default function Sidebar() {
+export default function SideBar() {
     return <Container>
             <Logo>
                 <div className="logo-img"></div>
