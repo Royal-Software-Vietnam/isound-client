@@ -9,6 +9,8 @@ const User = React.lazy(() => import('./pages/User/User'))
 const Home = React.lazy(() => import('./pages/Home/Home'))
 const Layout = React.lazy(() => import('./components/Layout'))
 
+console.log(`BUILD :: 02-24-2023`)
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <Suspense fallback={null}>
     <AppProvider>
