@@ -1,0 +1,1 @@
+import{j as e}from"./index-c135907d.js";function r(){return e("div",{children:"User Page"},void 0,!1,{fileName:"C:/Users/tuanx/Documents/code space/isound-client/src/pages/User/User.tsx",lineNumber:2,columnNumber:12},this)}export{r as default};
