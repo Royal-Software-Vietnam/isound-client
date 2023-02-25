@@ -63,6 +63,10 @@ export const signup = ({ username, password, email }:{ username:string, password
     return basicService.post('/user/signup', { username, password, email })
 }
 
+export const get_topRateData = () => {
+    return basicService.get("/audio/toprate")
+}
+
 export const search = (keyword:string) => {
     return basicService.get("/audio/search", {
         params: {

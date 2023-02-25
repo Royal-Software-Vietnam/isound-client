@@ -16,6 +16,6 @@ export default function Player () {
   const { mediaList }:any = useApp()
 
   return <div>
-    <ReactJkMusicPlayer drag quietUpdate audioLists={mediaList} />
+    <ReactJkMusicPlayer drag audioLists={mediaList} />
   </div>
 }

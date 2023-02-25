@@ -9,8 +9,8 @@ const App = React.createContext<{
     setLoading?: any,
     voiceSearch?: any, // chua can den
     setVoiceSearch?: any, // chua can den
-    mediaList?: Array<ReactJkMusicPlayerAudioListProps>,
-    setMediaList?: React.Dispatch<React.SetStateAction<ReactJkMusicPlayerAudioListProps[]>>
+    mediaList?: any // Array<ReactJkMusicPlayerAudioListProps>,
+    setMediaList?: any// React.Dispatch<React.SetStateAction<ReactJkMusicPlayerAudioListProps[]>>
 }>({})
 
 export default function AppProvider({ children }: { children: React.ReactNode }) {
@@ -18,7 +18,9 @@ export default function AppProvider({ children }: { children: React.ReactNode })
     const [ready, setReady] = useState<boolean>(true)
     const [loading, setLoading] = useState<boolean>(true)
     const [voiceSearch, setVoiceSearch] = useState<boolean>(false)
-    const [mediaList, setMediaList] = useState<Array<ReactJkMusicPlayerAudioListProps>>([])
+    const [mediaList, setMediaList] = useState<any>([
+      ]
+    )
 
     useEffect(() => {
         const load = async () => {
