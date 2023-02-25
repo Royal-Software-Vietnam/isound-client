@@ -110,7 +110,8 @@ export default function ListPlayed ({data}:{data:any}) {
     }
 
     return <Container>
-        <Heading>Recently Played</Heading>
+        <Heading>Top Rate
+        </Heading>
         <Text>Only for you for better live music</Text>
         <List>
             {data && data?.slice(0, 5).map((box:any, index:number) => (
