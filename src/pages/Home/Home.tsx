@@ -6,16 +6,6 @@ import ListSuggestion from "./ListSuggestion"
 import Slider from "./Slider"
 import { get_topRateData } from "../../services"
 
-const HomeLayout = styled.div`
-    height: 70%;
-`
-
-const Row = styled.div`
-    display: flex;
-    height: 50%;
-    padding: 0 55px;
-    margin-top: 16px;
-`
 export default function Home () {
 
     let [data, setData] = useState()
@@ -31,13 +21,13 @@ export default function Home () {
         getTopRateData()
     }, [])
 
-    return <HomeLayout>
-        <Row>
+    return <div className="h-[70%]">
+        <div className="flex h-[50%] px-12 mt-4">
             <Slider />
-        </Row>
-        <Row>
+        </div>
+        <div className="flex h-[50%] p-12 mt-4">
             <ListSuggestion data= {data}/>
             <ListPlayed data={data}/>
-        </Row>
-    </HomeLayout>
+        </div>
+    </div>
 }

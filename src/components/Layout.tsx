@@ -10,9 +10,8 @@ const Main = styled.div`
 `
 
 const RightSide = styled.div`
-    width: calc(100% - 16.46%);
+    width: calc(100% - 16%);
 `
-
 
 interface iLayoutProps {
     children: React.ReactElement
@@ -25,10 +24,10 @@ export default function Layout({ children }: iLayoutProps) {
     return <Main>
         {voiceSearch && <Voice setVoiceSearch={setVoiceSearch}/>}
         <SideBar />
-        <RightSide>
+        <div className="lg:w-[84%] w-full">
             <NavBar />
             {children}
-        </RightSide>
+        </div>
         <Player />
     </Main>
 }

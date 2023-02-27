@@ -1,93 +1,8 @@
-import { Typography } from "antd";
 import styled from "styled-components";
-import box1 from "../../assets/box-1.png";
 import HeartIcon from "../../assets/likeheart.svg"
 import PlayedBox from "./PlayedBox";
 import axios from "axios";
 import { useApp } from "../../context";
-
-const Container = styled.div`
-    background: #141414;
-    color: #ffffff;
-    width: 60%;
-    height: 100%;
-`
-
-const Heading = styled(Typography)`
-    font-size: 1.6rem;
-    line-height: 1.6rem;
-    color: #ffffff;
-`
-
-const Text = styled(Typography)`
-    font-size: 1rem;
-    line-height: 1rem;
-    color: #ffffff;
-    margin: 16px 0;
-`
-
-const List = styled.div`
-    height: 50%;
-    display: flex;
-    flex-wrap: wrap;
-`
-const Box = styled.div`
-    width: 100%;
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    padding: 12px 16px;
-    background: #161616;
-    filter: drop-shadow(-3px -3px 5px rgba(255,255,255,0.01 ));
-
-    .anticon {
-        font-size: 1.5rem;
-        color: #cbcbcb;
-        margin-right: 1.5rem;
-    }
-
-    .anticon:hover {
-        cursor: pointer;
-    }
-
-    .box-img {
-
-        width: 10%;
-        height: 100%;
-        border-radius: 0.4rem;
-        margin-right: 1.5rem;
-    }
-
-    .song-info {
-        color: #cbcbcb;
-        width: 65%;
-        
-        p {
-            font-size: 1.1rem;
-            font-weight: bold;
-            opacity: 0.75;
-        }
-
-        span {
-            font-size: 0.9rem;
-        }
-    }
-
-    .time {
-        color: #cbcbcb;
-        margin-right: 2rem;
-        font-size: 0.9rem;
-    }
-
-    .heart-icon {
-        display: flex;
-
-        img:hover {
-            fill: #e9003f;
-        }
-    }
-`
-
 
 export default function ListPlayed ({data}:{data:any}) {
 
@@ -108,27 +23,30 @@ export default function ListPlayed ({data}:{data:any}) {
         } // finally { setLoading(false) }
     }
 
-    return <Container>
-        <Heading>Top Rate
-        </Heading>
-        <Text>Only for you for better live music</Text>
-        <List>
+    return <div className="w-[50%] h-[100%] bg-[#141414] text-white">
+        <h2 className="text-[1.5rem] leading-6">Top Rate</h2>
+        <p className="text-[1rem] leading-4 my-4">Only for you for better live music</p>
+        <div className="h-[50%]">
             {data && data?.slice(0, 5).map((box:any, index:number) => (
-                <Box key={box?.id}>
-                    <PlayedBox />
-                    <img className="box-img" src={box?.bestThumbnail?.url}/>
-                    <div onClick={()=>addToList(box)} className="song-info" style={{cursor:'pointer'}}>
-                        <p>{box?.author?.name}</p>
-                        <span>{box?.title}</span>
+                <div className="grid grid-cols-12 gap-2 items-center" key={box?.id}>
+                    <div className="col-span-1 flex justify-center" onClick={()=> addToList(box)} style={{cursor:'pointer'}}>
+                        <PlayedBox />
                     </div>
-                    <div className="time">
-                        <p>{box?.duration}</p>
+                    <div className="col-span-2 p-1" onClick={()=> addToList(box)} style={{cursor:'pointer'}}>
+                        <img className="w-full rounded-lg" src={box?.bestThumbnail?.url}/>
                     </div>
-                    <div className="heart-icon">
+                    <div className="col-span-6" onClick={()=> addToList(box)} style={{cursor:'pointer'}}>
+                        <p className="text-[1rem]">{box?.author?.name}</p>
+                        <p className="text-[0.75rem] opacity-80">{box?.title}</p>
+                    </div>
+                    <div className="col-span-2 flex justify-center">
+                        <p className="text-[0.75rem]">{box?.duration}</p>
+                    </div>
+                    <div className="col-span-1">
                         <img src={HeartIcon} alt="heart-icon" />
                     </div>
-                </Box>
+                </div>
             ))}
-        </List>
-    </Container>
+        </div>
+    </div>
 }

@@ -105,8 +105,6 @@ const links = [
     { name: "Radio", path: "/radio" },
 ]
 
-
-
 export default function NavBar() {
     const location = useLocation()
     const { user } = useApp()
