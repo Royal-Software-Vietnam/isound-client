@@ -91,22 +91,21 @@ const Box = styled.div`
 
 export default function ListPlayed ({data}:{data:any}) {
 
-    const { mediaList, setMediaList }:any = useApp()
+    const { mediaList, setMediaList, setLoading }:any = useApp()
 
-    console.log(data)
-
-    const testAddToList = (testSrc:string) => {
-
-        console.log(mediaList)
-
-        // setMediaList((prevState:any) => [...prevState, {
-        //     name: 'Despacito',
-        //     singer: 'Luis Fonsi',
-        //     cover:
-        //         'http://res.cloudinary.com/alick/image/upload/v1502689731/Despacito_uvolhp.jpg',
-        //     musicSrc:
-        //         'http://res.cloudinary.com/alick/video/upload/v1502689683/Luis_Fonsi_-_Despacito_ft._Daddy_Yankee_uyvqw9.mp3',
-        // }])
+    const addToList = async (data:any) => {
+        // setLoading(true)
+        try {
+            let res = await axios.get(`https://isound.cyclic.app/audio/stream?mediaId=${data?.id}`)
+            setMediaList([...mediaList, {
+                name: data?.title,
+                singer: data?.author?.name,
+                cover: data?.bestThumbnail?.url,
+                musicSrc: res.data
+            }])
+        } catch (error) {
+            console.log(error)
+        } // finally { setLoading(false) }
     }
 
     return <Container>
@@ -118,17 +117,7 @@ export default function ListPlayed ({data}:{data:any}) {
                 <Box key={box?.id}>
                     <PlayedBox />
                     <img className="box-img" src={box?.bestThumbnail?.url}/>
-                    <div onClick={()=> setMediaList((prev:any)=> [...prev, {
-                                ...{
-                                    name: box?.title,
-                                    singer: box?.author?.name,
-                                    cover: box?.bestThumbnail?.url,
-                                    musicSrc: async () => {
-                                        let { data } = await axios.get(`https://isound.cyclic.app/audio/stream?mediaId=${box?.id}`)
-                                        return data
-                                    }
-                                  },
-                    }])} className="song-info" style={{cursor:'pointer'}}>
+                    <div onClick={()=>addToList(box)} className="song-info" style={{cursor:'pointer'}}>
                         <p>{box?.author?.name}</p>
                         <span>{box?.title}</span>
                     </div>
