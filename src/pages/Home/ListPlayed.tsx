@@ -124,7 +124,7 @@ export default function ListPlayed ({data}:{data:any}) {
                                     singer: box?.author?.name,
                                     cover: box?.bestThumbnail?.url,
                                     musicSrc: async () => {
-                                        let { data } = await axios.get(`http://localhost:8888/audio/stream?mediaId=${box?.id}`)
+                                        let { data } = await axios.get(`https://isound.cyclic.app/audio/stream?mediaId=${box?.id}`)
                                         return data
                                     }
                                   },

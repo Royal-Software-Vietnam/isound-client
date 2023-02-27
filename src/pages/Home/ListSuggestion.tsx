@@ -4,6 +4,8 @@ import box1 from "../../assets/box-1.png";
 import box2 from "../../assets/box-2.png";
 import box3 from "../../assets/box-3.png";
 import box4 from "../../assets/box-4.png";
+import axios from "axios";
+import { useApp } from "../../context";
 
 const Container = styled.div`
     background: #141414;
@@ -37,12 +39,6 @@ const Box = styled.div`
     padding: 8px;
 
     .box-img {
-        background-position: center;
-        background-image:
-            linear-gradient(
-                to right, #e6101033, #e9003f33
-            ),
-            url(${box1});
         width: 100%;
         height: 100%;
         border-radius: 0.4rem;
@@ -54,15 +50,32 @@ const Box = styled.div`
     }
 `
 
-export default function ListSuggestion () {
+export default function ListSuggestion ({data}:{data:any}) {
+    const { mediaList, setMediaList }:any = useApp()
+
+    console.log(data)
+
     return <Container>
         <Heading>Made For You</Heading>
         <Text>The more you listen for better recommandation</Text>
         <List>
-            <Box><div className="box-img"></div></Box>
-            <Box><div className="box-img"></div></Box>
-            <Box><div className="box-img"></div></Box>
-            <Box><div className="box-img"></div></Box>
+        {data && data?.slice(6, 10).map((box:any, index:number) => (
+                <Box key={box?.id}>
+                    <div onClick={()=> setMediaList((prev:any)=> [...prev, {
+                                ...{
+                                    name: box?.title,
+                                    singer: box?.author?.name,
+                                    cover: box?.bestThumbnail?.url,
+                                    musicSrc: async () => {
+                                        let { data } = await axios.get(`https://isound.cyclic.app/audio/stream?mediaId=${box?.id}`)
+                                        return data
+                                    }
+                                  },
+                    }])} className="song-info" style={{cursor:'pointer'}}>
+                        <img className="box-img" src={box?.bestThumbnail?.url}/>
+                    </div>
+                </Box>
+            ))}
         </List>
     </Container>
 }

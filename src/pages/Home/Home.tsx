@@ -36,7 +36,7 @@ export default function Home () {
             <Slider />
         </Row>
         <Row>
-            <ListSuggestion/>
+            <ListSuggestion data= {data}/>
             <ListPlayed data={data}/>
         </Row>
     </HomeLayout>

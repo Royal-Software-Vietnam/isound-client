@@ -40,7 +40,7 @@ const USER_SERVICE = (url:string) => {
 }
 
 const userService = USER_SERVICE("http://localhost:8888")
-const basicService = BASIC_SERVICE("http://localhost:8888")
+const basicService = BASIC_SERVICE("https://isound.cyclic.app")
 
 export const getCurrentUser = () => {
     /* @ts-ignore */

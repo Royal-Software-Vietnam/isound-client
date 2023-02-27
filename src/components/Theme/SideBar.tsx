@@ -2,12 +2,6 @@ import styled from "styled-components"
 import { NavLink } from "react-router-dom"
 import IconNewPlaylist from "../../assets/new-playlist.svg"
 
-const Container = styled.div`
-    width: 16.4%;
-    background: #161616;
-    height: 100vh;
-`
-
 const Logo = styled.div`
     display: flex;
     flex-direction: column;
@@ -40,8 +34,8 @@ const Logo = styled.div`
 const NavLists = styled.ul`
   display: flex;
   flex-direction: column;
-  width: 233px;
-  margin-left: 58px;
+  width: 100%;
+  margin: 0 25%;
 
   a {
     text-decoration: none;
@@ -74,7 +68,6 @@ const NavLists = styled.ul`
 
 const IconNav = styled.div`
   width: 233px;
-  margin-left: 58px;
   position: absolute;
   bottom: 12%;
   display: flex;
@@ -101,6 +94,7 @@ const IconNav = styled.div`
     border: 2px solid #e9003f;
     border-radius: 50%;
     margin-right: 20px;
+    margin-left: 25%;
   }
 
   img {
@@ -127,7 +121,7 @@ const links = [
 ]
 
 export default function SideBar() {
-    return <Container>
+    return <div className="container hidden lg:block w-[16%] bg-[#161616]">
             <Logo>
                 <div className="logo-img"></div>
                 <p className="label-fullname">iSound</p>
@@ -140,12 +134,13 @@ export default function SideBar() {
                         <li>{link.name}</li>
                     </NavLink>
                 ))}
-            </NavLists> 
+            </NavLists>
+
             <IconNav>
                 <NavLink to="/new-playlist">
                   <div className="icon-img"><img src={IconNewPlaylist} alt="icon-new-playlist" /></div>
                   New Playlist
                 </NavLink>
             </IconNav>
-    </Container>
+    </div>
 }

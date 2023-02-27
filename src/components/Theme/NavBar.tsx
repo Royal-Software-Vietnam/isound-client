@@ -5,14 +5,6 @@ import { SearchOutlined } from "@ant-design/icons"
 import UserModal from "../UserModal"
 import { Input } from "antd"
 
-const Container = styled.div`
-    width: 100%;
-    display: flex;
-    align-items: center;
-    height: 10.56%;
-    padding: 0 55px;
-`
-
 const Logo = styled.div`
     width: 212px;
     margin-left: 100px;
@@ -118,7 +110,7 @@ const links = [
 export default function NavBar() {
     const location = useLocation()
     const { user } = useApp()
-    return <Container>
+    return <div className="container hidden lg:flex items-center px-12 h-[11%]">
         <SearchInput placeholder="Type song, arstist and playlist" prefix={<SearchOutlined />} />
         <NavLists>
             {links.map((link, index) => (
@@ -139,5 +131,5 @@ export default function NavBar() {
         <UserModal />
 
 
-    </Container>
+    </div>
 }
