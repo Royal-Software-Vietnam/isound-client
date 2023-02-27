@@ -67,7 +67,7 @@ export const get_topRateData = () => {
     return basicService.get("/audio/toprate")
 }
 
-export const search = (keyword:string) => {
+export const get_search = (keyword:string) => {
     return basicService.get("/audio/search", {
         params: {
             keyword
