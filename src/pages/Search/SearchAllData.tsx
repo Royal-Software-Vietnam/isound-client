@@ -1,11 +1,10 @@
-import { Tabs } from 'antd'
 import React from 'react'
 
-function SearchAllData({data, tab, key}:{data:any, tab:any, key:any}) {
+function SearchAllData({data}:{data:any}) {
   return (
-    <Tabs.TabPane tab={tab} key={key}>
-        <div>1</div>
-    </Tabs.TabPane>
+    <div>
+      1
+    </div>
   )
 }
 

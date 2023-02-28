@@ -82,11 +82,20 @@ export default function Search () {
         {/* <StyledTab defaultActiveKey="1" items={items} onChange={onChange} /> */}
         <StyledTab defaultActiveKey = "1">
           <Tabs.TabPane tab="Searching Result" key="0" disabled= {true} >
+            <div>Title</div>
           </Tabs.TabPane>
-          <SearchAllData data={data} tab="All" key="1" />
-          <SearchSongs data={data} tab="Songs" key="2" />
-          <SearchAlbum data={data} tab="Playlist/Album" key="3" />
-          <SearchArtist data={data} tab="Artist" key="4" />
+          <Tabs.TabPane tab="All" key="1">
+            <SearchAllData data={data} />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="Songs" key="2">
+            <SearchSongs data={data} />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="Playlist/Album" key="3">
+            <SearchAlbum data={data} />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="Artist" key="4">
+            <SearchArtist data={data} />
+          </Tabs.TabPane>
         </StyledTab>
     </div>
 }

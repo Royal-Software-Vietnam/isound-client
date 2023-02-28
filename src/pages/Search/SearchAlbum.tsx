@@ -1,11 +1,9 @@
-import { Tabs } from 'antd'
 import React from 'react'
 
-function SearchAlbum({data, tab, key}:{data:any, tab:any, key:any}) {
+function SearchAlbum({data}:{data:any}) {
   return (
-    <Tabs.TabPane tab={tab} key={key}>
-        <div>3</div>
-    </Tabs.TabPane>
+    <div>3</div>
+
   )
 }
 
