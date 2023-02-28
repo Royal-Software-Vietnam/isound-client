@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
 import UserModal from './components/UserModal'
 import AppProvider from './context'
+import { Player } from './components/Theme'
 
 const User = React.lazy(() => import('./pages/User/User'))
 const Home = React.lazy(() => import('./pages/Home/Home'))
@@ -24,6 +25,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           </Routes>
         </Layout>
       </BrowserRouter>
+      <Player />
     </AppProvider>
   </Suspense>
 )

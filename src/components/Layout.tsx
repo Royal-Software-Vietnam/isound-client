@@ -18,6 +18,5 @@ export default function Layout({ children }: iLayoutProps) {
             <NavBar />
             {children}
         </div>
-        <Player />
     </div>
 }
