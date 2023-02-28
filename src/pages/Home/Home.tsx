@@ -27,7 +27,7 @@ export default function Home () {
         </div>
         <div className="flex h-[50%] p-12 mt-4">
             <ListSuggestion data= {data}/>
-            <ListPlayed data={data}/>
+            <ListPlayed data = {data}/>
         </div>
     </div>
 }

@@ -4,6 +4,10 @@ import { useLocation } from "react-router-dom"
 import { useApp } from "../../context";
 import { Tabs, TabsProps } from "antd";
 import styled from "styled-components";
+import SearchAllData from "./SearchAllData";
+import SearchSongs from "./SearchSongs";
+import SearchAlbum from "./SearchAlbum";
+import SearchArtist from "./SearchArtist";
 
 const StyledTab = styled(Tabs) `
     .ant-tabs-tab-btn {
@@ -12,6 +16,12 @@ const StyledTab = styled(Tabs) `
         font-size: 1rem;
         text-align: center;
         opacity: 0.8;
+    }
+
+    .ant-tabs-tab-btn:hover,
+    .ant-tabs-tab-btn:focus:not(:focus-visible),
+    .ant-tabs-tab-btn:active {
+      color: #e9003f;
     }
 
     #rc-tabs-0-tab-0 {
@@ -38,43 +48,13 @@ const StyledTab = styled(Tabs) `
     .ant-tabs-nav::before {
         background: rgba(255, 255, 255, 0.2);
     }
+
+    .ant-tabs-tabpane {
+        color: #ffffff;
+    }
 `
 
-const onChange = (key: string) => {
-  console.log(key);
-};
-
-const items: TabsProps['items'] = [
-  {
-    key: '0',
-    label: `Searching Result`,
-    children: `Content of Tab Pane 1`,
-    disabled: true
-  },
-  {
-    key: '1',
-    label: `All`,
-    children: `Content of Tab Pane 1`,
-  },
-  {
-    key: '2',
-    label: `Songs`,
-    children: `Content of Tab Pane 2`,
-  },
-  {
-    key: '3',
-    label: `Playlist/Album`,
-    children: `Content of Tab Pane 3`,
-  },
-  {
-    key: '4',
-    label: `Artist`,
-    children: `Content of Tab Pane 3`,
-  },
-];
-
 export default function Search () {
-
         const urlParams = new URLSearchParams(window.location.search);
         const keyword = urlParams.get('keyword')
         const { setLoading } = useApp()
@@ -99,6 +79,14 @@ export default function Search () {
 
     
     return <div className="container px-12">
-        <StyledTab defaultActiveKey="1" items={items} onChange={onChange} />
+        {/* <StyledTab defaultActiveKey="1" items={items} onChange={onChange} /> */}
+        <StyledTab defaultActiveKey = "1">
+          <Tabs.TabPane tab="Searching Result" key="0" disabled= {true} >
+          </Tabs.TabPane>
+          <SearchAllData data={data} tab="All" key="1" />
+          <SearchSongs data={data} tab="Songs" key="2" />
+          <SearchAlbum data={data} tab="Playlist/Album" key="3" />
+          <SearchArtist data={data} tab="Artist" key="4" />
+        </StyledTab>
     </div>
 }
