@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="test" element={<User />} />
+            <Route path="user" element={<User />} />
             <Route path="search" element={<Search />} />
           </Routes>
         </Layout>

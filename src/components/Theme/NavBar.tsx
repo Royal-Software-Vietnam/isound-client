@@ -90,7 +90,7 @@ const NavLists = styled.ul`
         height: 2px;
         position: absolute;
         background: #141414;
-        bottom: -4px;
+        bottom: -8px;
         left: 0;
     }
 
@@ -101,7 +101,7 @@ const NavLists = styled.ul`
 
 const links = [
     { name: "Home", path: "/" },
-    { name: "Browse", path: "/browse" },
+    { name: "Browse", path: "/user" },
     { name: "Radio", path: "/radio" },
 ]
 
