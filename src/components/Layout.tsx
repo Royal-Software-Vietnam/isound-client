@@ -11,7 +11,7 @@ export default function Layout({ children }: iLayoutProps) {
 
     const { voiceSearch, setVoiceSearch } = useApp()
 
-    return <div className="w-full h-full flex">
+    return <div className="w-full h-[100vh] flex">
         {voiceSearch && <Voice setVoiceSearch={setVoiceSearch}/>}
         <SideBar />
         <div className="lg:w-[84%] w-full">

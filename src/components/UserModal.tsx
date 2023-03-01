@@ -128,7 +128,6 @@ const FormBtn = styled(Button)`
 
 const LoginModalBtn = styled(Button)`
   height: 2.2rem;
-  margin-left: 2rem;
 
   &.ant-btn-primary {
     border: 2px solid #e9003f;

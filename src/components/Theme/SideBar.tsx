@@ -35,9 +35,10 @@ const NavLists = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 0 25%;
+  padding: 0 20%;
 
   a {
+    width: 100%;
     text-decoration: none;
   }
 
@@ -66,47 +67,6 @@ const NavLists = styled.ul`
   }
 `
 
-const IconNav = styled.div`
-  width: 233px;
-  position: absolute;
-  bottom: 12%;
-  display: flex;
-  align-items: center;
-
-  a {
-    color: #ffffff;
-    opacity: 0.75;
-    text-decoration: none;
-    font-size: 1.1rem;
-    line-height: 1.1rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-  }
-
-  .icon-img {
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0, 0, 0, 0);
-    border: 2px solid #e9003f;
-    border-radius: 50%;
-    margin-right: 20px;
-    margin-left: 25%;
-  }
-
-  img {
-    width: 60%;
-  }
-
-  & :hover {
-    color: #e9003f;
-    opacity: 1;
-  }
-`
-
 const links = [
   {name: "Your Library", path: "/library", type: "primary"},
   {name: "Made For You", path: "/made-for-you", type: "secondary"},
@@ -121,7 +81,7 @@ const links = [
 ]
 
 export default function SideBar() {
-    return <div className="container hidden lg:block w-[16%] bg-[#161616]">
+    return <div className="container hidden lg:block w-[16%] bg-[#161616] relative">
             <Logo>
                 <div className="logo-img"></div>
                 <p className="label-fullname">iSound</p>
@@ -136,11 +96,11 @@ export default function SideBar() {
                 ))}
             </NavLists>
 
-            <IconNav>
-                <NavLink to="/new-playlist">
-                  <div className="icon-img"><img src={IconNewPlaylist} alt="icon-new-playlist" /></div>
+            <div className="absolute bottom-24 pl-[20%] pt-4 w-full flex items-center border-t-[2px] border-[#111111] opacity-80 hover:opacity-100 hover:text-[#E9003F] hover:cursor-pointer">
+                <div className="w-[2.5rem] h-[2.5rem] flex items-center mr-3 p-2 rounded-full border-2 border-[#E9003F]"><img className="w-full" src={IconNewPlaylist} alt="icon-new-playlist" /></div>
+                <NavLink className="text-[1.2rem] leading-5" to="/new-playlist">
                   New Playlist
                 </NavLink>
-            </IconNav>
+            </div>
     </div>
 }

@@ -125,8 +125,10 @@ export default function NavBar() {
             <div className="logo-img"></div>
             <p className="label-fullname">{ user.user_name }</p>
         </Logo>}
-
-        <UserModal />
+        
+        <div className="absolute right-20">
+            <UserModal />
+        </div>
 
 
     </div>
