@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import HeartIcon from "../../assets/likeheart.svg"
 import PlayedBox from "./PlayedBox";
 import axios from "axios";
 import { useApp } from "../../context";
+import { HeartFilled } from "@ant-design/icons";
 
 export default function ListPlayed ({data}:{data:any}) {
 
@@ -43,7 +43,7 @@ export default function ListPlayed ({data}:{data:any}) {
                         <p className="text-[0.75rem]">{box?.duration}</p>
                     </div>
                     <div className="col-span-1">
-                        <img src={HeartIcon} alt="heart-icon" />
+                        <HeartFilled />
                     </div>
                 </div>
             ))}
