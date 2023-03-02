@@ -25,9 +25,25 @@ const RhapPlayer = styled(AudioPlayer)`
     font-size: 1.4rem;
   }
 
-  .large:hover,
-  .small:hover {
+  &.rhap_container svg {
+    color: #ffffff;
+    opacity: 0.7;
+  }
+
+  &.rhap_container svg:hover,
+  &.rhap_container svg:focus {
     color: #E9003F;
+  }
+
+  .rhap_time {
+    color: #ffffff;
+    margin: 0 20px;
+    font-size: 0.75rem;
+  }
+
+  .rhap_volume-indicator,
+  .rhap_progress-indicator {
+    background: #E9003F;
   }
 `
 
