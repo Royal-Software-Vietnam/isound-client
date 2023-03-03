@@ -1,7 +1,5 @@
 import styled from "styled-components"
-import { useRef } from "react"
-import ReactJkMusicPlayer, { ReactJkMusicPlayerAudioListProps } from 'react-jinke-music-player'
-import 'react-jinke-music-player/assets/index.css'
+import { useRef, useState } from "react"
 import { useApp } from "../../context"
 import AudioPlayer from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
@@ -64,14 +62,32 @@ const RhapPlayer = styled(AudioPlayer)`
 export default function Player () {
 
   const { mediaList }:any = useApp()
-  const audioRef:any = useRef(null);
+  const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0)
+  
+  const handleEnded = () => {
+    console.log('<END>')
+    setCurrentTrackIndex(
+      (currentTrack:number) => currentTrack < mediaList?.length - 1 ? currentTrack + 1 : 0
+    )
+  }
+
+  const handleNext = () => {
+    console.log('<NEXT>')
+    setCurrentTrackIndex(
+      (currentTrack:number) => currentTrack < mediaList?.length - 1 ? currentTrack + 1 : 0
+    )
+  }
+
+  
 
   return <div className="fixed bottom-0 left-0 right-0">
     {/* <ReactJkMusicPlayer drag audioLists={mediaList} preload={true} defaultVolume={50} /> */}
-    <RhapPlayer
+    {mediaList.length > 0 && <RhapPlayer
       autoPlay
-      src="https://www.youtube.com/watch?v=NG3YyVNyKUk"
+      src={mediaList[currentTrackIndex].src}
       preload="auto"
+      onEnded={handleEnded}
+      onClickNext={handleNext}
       // onPlay={e => console.log("onPlay")}
       showSkipControls={true}
       showJumpControls={false}
@@ -86,6 +102,6 @@ export default function Player () {
       muted={false}
       showFilledVolume={true}
       showFilledProgress={true}
-    />
+    />}
   </div>
 }

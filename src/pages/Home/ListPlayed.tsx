@@ -12,11 +12,12 @@ export default function ListPlayed ({data}:{data:any}) {
         // setLoading(true)
         try {
             let res = await axios.get(`https://isound.cyclic.app/audio/stream?mediaId=${data?.id}`)
+            console.log(res.data)
             setMediaList([...mediaList, {
                 name: data?.title,
                 singer: data?.author?.name,
                 cover: data?.bestThumbnail?.url,
-                musicSrc: res.data
+                src: res.data
             }])
         } catch (error) {
             console.log(error)
