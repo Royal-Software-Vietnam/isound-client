@@ -1,13 +1,13 @@
 import styled from "styled-components"
 import { useRef, useState } from "react"
 import { useApp } from "../../context"
-import AudioPlayer from 'react-h5-audio-player';
+import AudioPlayer, { RHAP_UI } from 'react-h5-audio-player';
 import 'react-h5-audio-player/lib/styles.css';
 import { CaretRightOutlined, PauseOutlined, StepBackwardOutlined, StepForwardOutlined } from "@ant-design/icons"
 
 const RhapPlayer = styled(AudioPlayer)`
   &.rhap_container {
-    background: radial-gradient(rgba(0,0,0,0), #161616);
+    background: radial-gradient(rgba(0,0,0,0.5), #111111);
   }
 
   .rhap_button-clear {
@@ -16,16 +16,25 @@ const RhapPlayer = styled(AudioPlayer)`
   }
 
   .large {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
   }
 
   .small {
-    font-size: 1.4rem;
+    font-size: 1.1rem;
   }
 
   &.rhap_container svg {
     color: #ffffff;
     opacity: 0.7;
+  }
+
+  .rhap_progress-section {
+    flex: 6 1 auto;
+  }
+
+  .rhap_additional-controls {
+    justify-content: space-between;
+    margin-right: 10px;
   }
 
   &.rhap_container svg:hover,
@@ -34,6 +43,7 @@ const RhapPlayer = styled(AudioPlayer)`
   &.rhap_play-status--playing .rhap_play-pause-button svg {
     color: #E9003F;
     opacity: 1;
+    transition: all 0.3s ease-in-out;
   }
 
   .rhap_time {
@@ -45,6 +55,10 @@ const RhapPlayer = styled(AudioPlayer)`
   .rhap_volume-filled,
   .rhap_progress-filled {
     background: #E9003F;
+  }
+
+  .rhap_download-progress {
+    background: #444444;
   }
 
   .rhap_volume-bar,
@@ -83,7 +97,7 @@ export default function Player () {
   return <div className="fixed bottom-0 left-0 right-0">
     {/* <ReactJkMusicPlayer drag audioLists={mediaList} preload={true} defaultVolume={50} /> */}
     {mediaList.length > 0 && <RhapPlayer
-      autoPlay
+      autoPlay={true}
       src={mediaList[currentTrackIndex].src}
       preload="auto"
       onEnded={handleEnded}
@@ -102,6 +116,21 @@ export default function Player () {
       muted={false}
       showFilledVolume={true}
       showFilledProgress={true}
+      customAdditionalControls = {
+        [
+          <div className="max-h-12 w-[25rem] flex items-center">
+            <div className="w-[9rem] px-3">
+              <img className="w-full rounded-lg" src={mediaList[currentTrackIndex].cover} />
+            </div>
+            <div className="flex flex-col justify-center">
+              <p className="py-1">{mediaList[currentTrackIndex].name}</p>
+              <span>{mediaList[currentTrackIndex].singer}</span>
+            </div>
+          </div>,
+          RHAP_UI.LOOP
+        ]
+        
+      }
     />}
   </div>
 }

@@ -78,6 +78,7 @@ const NavLists = styled.ul`
 
     li:hover {
         color: #e9003f;
+        transition: all 0.3s ease-in-out;
     }
 
     li.active {

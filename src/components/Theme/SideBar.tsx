@@ -50,6 +50,7 @@ const NavLists = styled.ul`
 
   li:hover {
     color: #e9003f;
+    transition: all 0.3s ease-in-out;
   }
 
   .primary {
@@ -96,7 +97,7 @@ export default function SideBar() {
                 ))}
             </NavLists>
 
-            <div className="absolute bottom-20 pl-[20%] pt-4 w-full flex items-center border-t-[2px] border-[#111111] opacity-80 hover:opacity-100 hover:text-[#E9003F] hover:cursor-pointer">
+            <div className="absolute bottom-20 pl-[20%] pt-4 w-full flex items-center border-t-[2px] border-[#111111] opacity-80 hover:text-[#E9003F] hover:ease-in-out duration-300 hover:cursor-pointer">
                 <div className="w-[2.5rem] h-[2.5rem] flex items-center mr-3 p-2 rounded-full border-2 border-[#E9003F]"><img className="w-full" src={IconNewPlaylist} alt="icon-new-playlist" /></div>
                 <NavLink className="text-[1.2rem] leading-5" to="/new-playlist">
                   New Playlist

@@ -13,7 +13,7 @@ export default function ListSuggestion ({data}:{data:any}) {
                 name: data?.title,
                 singer: data?.author?.name,
                 cover: data?.bestThumbnail?.url,
-                musicSrc: res.data
+                src: res.data
             }])
         } catch (error) {
             console.log(error)
