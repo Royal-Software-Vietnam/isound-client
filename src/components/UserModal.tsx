@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import '../assets/GlobalStyles.css'
 import LoginBackground from "./../assets/login-bc.jpg"
 import { LockOutlined, MailOutlined, UserOutlined } from '@ant-design/icons';
-import { signin, signup } from '../services';
+import { signin, signup, getCurrentUser } from '../services';
 import { useApp } from '../context';
 
 const Container = styled.div`
@@ -170,6 +170,10 @@ const UserModal: React.FC = () => {
         /* @ts-ignore */
         localStorage.setItem('auth', JSON.stringify(data))
       }
+
+      let { data }:any = getCurrentUser()
+      setUser(data)
+
       setOpen(false)
       setLoading(false)
     } catch (error) {
