@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { NavLink } from "react-router-dom"
 import IconNewPlaylist from "../../assets/new-playlist.svg"
+import { createUserPlaylist } from "../../services"
 
 const Logo = styled.div`
     display: flex;
@@ -82,6 +83,12 @@ const links = [
 ]
 
 export default function SideBar() {
+
+    const testCreatePlaylist = async () => {
+      let { data }:any = createUserPlaylist({ playlist_name: 'test_001' })
+      console.log(data)
+    }
+
     return <div className="container hidden lg:block w-[16%] bg-[#161616] relative">
             <Logo>
                 <div className="logo-img"></div>
@@ -97,11 +104,11 @@ export default function SideBar() {
                 ))}
             </NavLists>
 
-            <div className="absolute bottom-20 pl-[20%] pt-4 w-full flex items-center border-t-[2px] border-[#111111] opacity-80 hover:text-[#E9003F] hover:ease-in-out duration-300 hover:cursor-pointer">
+            <div onClick={(e:any)=>testCreatePlaylist()} className="absolute bottom-20 pl-[20%] pt-4 w-full flex items-center border-t-[2px] border-[#111111] opacity-80 hover:text-[#E9003F] hover:ease-in-out duration-300 hover:cursor-pointer">
                 <div className="w-[2.5rem] h-[2.5rem] flex items-center mr-3 p-2 rounded-full border-2 border-[#E9003F]"><img className="w-full" src={IconNewPlaylist} alt="icon-new-playlist" /></div>
-                <NavLink className="text-[1.2rem] leading-5" to="/new-playlist">
+                <p className="text-[1.2rem] leading-5">
                   New Playlist
-                </NavLink>
+                </p>
             </div>
     </div>
 }

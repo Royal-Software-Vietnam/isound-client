@@ -1,18 +1,18 @@
-import axios, {AxiosRequestConfig, AxiosResponse, AxiosInstance} from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosInstance } from "axios";
 
-const BASIC_SERVICE = (url:string) => {
-    const axiosInstance:AxiosInstance = axios.create({ baseURL: url })
+const BASIC_SERVICE = (url: string) => {
+    const axiosInstance: AxiosInstance = axios.create({ baseURL: url })
     return axiosInstance
 }
-const USER_SERVICE = (url:string) => {
-    const axiosInstance:AxiosInstance = axios.create({ baseURL: url })
+const USER_SERVICE = (url: string) => {
+    const axiosInstance: AxiosInstance = axios.create({ baseURL: url })
     // @ts-ignore
     axiosInstance.interceptors.request.use((request: AxiosRequestConfig) => {
         // @ts-ignore
-        const user:any = window?.user
-        if (user?.accesstoken) {
+        const { accessToken }: any = JSON.parse(localStorage.getItem("auth"))
+        if (accessToken) {
             // @ts-ignore
-            request.headers['Authorization'] = `Bearer ${user?.accesstoken}`
+            request.headers['access_token'] = `${accessToken}`
         }
         return request
     })
@@ -39,27 +39,26 @@ const USER_SERVICE = (url:string) => {
     return axiosInstance
 }
 
-const userService = USER_SERVICE("http://localhost:8888")
+const userService = USER_SERVICE("https://isound.cyclic.app")
 const basicService = BASIC_SERVICE("https://isound.cyclic.app")
 
 export const getCurrentUser = () => {
     /* @ts-ignore */
-    let { accessToken }:any = JSON.parse(localStorage.getItem('auth'))
+    let { accessToken }: any = JSON.parse(localStorage.getItem('auth'))
 
-    return axios.get("http://localhost:8888/user/profile", { headers: {
-        access_token: accessToken || 'empty'
-} })
+    return axios.get("https://isound.cyclic.app/user/profile", {
+        headers: {
+            access_token: accessToken || 'empty'
+        }
+    })
 }
 
-export const addToFavoriteList = (favorite_list_id:string, audio_id:string) => {
-    return userService.put(`/favorite/${favorite_list_id}`, { audio_id })
-}
 
-export const signin = ({ email, password }:{ email:string, password:string }) => {
+export const signin = ({ email, password }: { email: string, password: string }) => {
     return basicService.post('/user/signin', { email, password })
 }
 
-export const signup = ({ username, password, email }:{ username:string, password:string, email:string }) => {
+export const signup = ({ username, password, email }: { username: string, password: string, email: string }) => {
     return basicService.post('/user/signup', { username, password, email })
 }
 
@@ -67,10 +66,30 @@ export const get_topRateData = () => {
     return basicService.get("/audio/toprate")
 }
 
-export const get_search = (keyword:string) => {
+export const get_search = (keyword: string) => {
     return basicService.get("/audio/search", {
         params: {
             keyword
         }
+    })
+}
+
+/* <--- [user services] ---> */
+
+interface iCreatePlayListPayload {
+    playlist_name:string,
+    playlist_description?:string,
+    playlist_image?:string,
+    playlist_status?:boolean
+    playlist_media?:Array<any>
+}
+
+export const getAllUserPlaylist = () => userService.get("/playlist")
+
+export const createUserPlaylist = ({
+    playlist_name, playlist_description, playlist_image, playlist_status, playlist_media
+}:iCreatePlayListPayload) => {
+    return userService.post("/playlist", {
+        playlist_name, playlist_description, playlist_image, playlist_status, playlist_media
     })
 }
