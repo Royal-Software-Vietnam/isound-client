@@ -57,6 +57,7 @@ const StyledTab = styled(Tabs) `
 export default function Search () {
         const urlParams = new URLSearchParams(window.location.search);
         const keyword = urlParams.get('keyword')
+        const location = useLocation()
         const { setLoading } = useApp()
         const [data, setData] = useState([])
 
@@ -75,7 +76,7 @@ export default function Search () {
 
         useEffect(() => {
             getDataByKeyword()
-        }, [keyword])
+        }, [location.search])
 
     
     return <div className="container px-12">

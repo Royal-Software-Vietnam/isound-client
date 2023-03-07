@@ -217,17 +217,17 @@ const UserModal: React.FC = () => {
                   <>
                     <div className="form-action">
                       <Form.Item required name="username" style={{ width: '100%' }}>
-                        <InputAntd placeholder='Username' prefix={<UserOutlined />} />
+                        <InputAntd type='text' placeholder='Username' prefix={<UserOutlined />} />
                       </Form.Item>
                     </div>
                     <div className="form-action">
                       <Form.Item required name="password" style={{ width: '100%' }}>
-                        <InputAntd placeholder='Password' prefix={<LockOutlined />} />
+                        <InputAntd type='password' placeholder='Password' prefix={<LockOutlined />} />
                       </Form.Item>
                     </div>
                     <div className="form-action">
                       <Form.Item required name="email" style={{ width: '100%' }}>
-                        <InputAntd placeholder='Email' prefix={<MailOutlined />} />
+                        <InputAntd type='email' placeholder='Email' prefix={<MailOutlined />} />
                       </Form.Item>
                     </div>
                     <FormBtn type='primary' htmlType="submit">
@@ -238,12 +238,12 @@ const UserModal: React.FC = () => {
                   <>
                     <div className="form-action">
                       <Form.Item required name="email" style={{ width: '100%' }}>
-                        <InputAntd placeholder='Email' prefix={<UserOutlined />} />
+                        <InputAntd type='email' placeholder='Email' prefix={<UserOutlined />} />
                       </Form.Item>
                     </div>
                     <div className="form-action">
                       <Form.Item required name="password" style={{ width: '100%' }}>
-                        <InputAntd placeholder='Password' prefix={<LockOutlined />} />
+                        <InputAntd type='password' placeholder='Password' prefix={<LockOutlined />} />
                       </Form.Item>
                     </div>
                     <FormBtn type='primary' htmlType="submit">

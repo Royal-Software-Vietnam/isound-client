@@ -4,7 +4,7 @@ import { useApp } from "../../context"
 import { SearchOutlined } from "@ant-design/icons"
 import UserModal from "../UserModal"
 import { Button, Input } from "antd"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const Logo = styled.div`
     width: 212px;
@@ -136,7 +136,6 @@ export default function NavBar() {
     //Handle Search
     const navigate = useNavigate()
     const handleSearch = (e: React.SyntheticEvent) => {
-        console.log("<<Test>>")
         e.preventDefault()
 
         const target = e.target as typeof e.target & {
@@ -154,10 +153,7 @@ export default function NavBar() {
         </form>
         <NavLists>
             {links.map((link, index) => (
-                <NavLink
-                    key={index}
-                    to={link.path}
-                >
+                <NavLink key={index} to={link.path} >
                     <li className={location.pathname === link.path ? 'active' : ""}>{link.name}</li>
                 </NavLink>
             ))}
