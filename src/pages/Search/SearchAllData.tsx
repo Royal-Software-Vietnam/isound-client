@@ -7,12 +7,23 @@ function SearchAllData({data}:{data:any}) {
 
   console.log(data?.videos)
 
-  const addToList = (data:any) => {
+  const addToList = async (data:any) => {
     console.log(data?.videoId)
+    try {
+            let res = await axios.get(`https://isound.cyclic.app/audio/stream?mediaId=${data?.videoId}`)
+            setMediaList([...mediaList, {
+                name: data?.title,
+                singer: data?.author?.name,
+                cover: data?.image,
+                src: res.data
+            }])
+        } catch (error) {
+            console.log(error)
+        }
   }
 
   return (
-    <div>
+    <div className="h-[70vh] overflow-auto">
       {data?.videos && data?.videos.map((item:any, index:number) => (
         <div className="flex hover:cursor-pointer hover:opacity-80" key={item?.videoId} onClick={()=> addToList(item)}>
           <div className="w-[12rem] mb-8">
