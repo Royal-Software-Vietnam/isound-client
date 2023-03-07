@@ -159,22 +159,17 @@ export default function NavBar() {
             ))}
         </NavLists>
 
-        { user && <div className="flex items-center">
+        { user
+         ? <div className="flex items-center">
             <Logo className="mr-8">
                 <div className="logo-img"></div>
                 <p className="label-fullname">{ user.user_name }</p>
             </Logo>
             <LogOut type="primary" onClick={handleLogout}>Log out</LogOut>
          </div>
-        }
-         
-        <div className="absolute right-20">
+         : <div className="absolute right-20">
             <UserModal />
-        </div>
-        
+        </div>     
+        }
     </div>
-}
-
-function useFetch() {
-    throw new Error("Function not implemented.")
 }
