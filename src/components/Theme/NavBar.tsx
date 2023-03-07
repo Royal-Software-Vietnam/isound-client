@@ -1,9 +1,10 @@
 import styled from "styled-components"
-import { NavLink, useLocation } from "react-router-dom"
+import { BrowserRouter, NavLink, useLocation, useNavigate, useRoutes, useSearchParams, useSubmit } from "react-router-dom"
 import { useApp } from "../../context"
 import { SearchOutlined } from "@ant-design/icons"
 import UserModal from "../UserModal"
-import { Input } from "antd"
+import { Button, Input } from "antd"
+import { useState } from "react"
 
 const Logo = styled.div`
     width: 212px;
@@ -31,8 +32,6 @@ const SearchInput = styled(Input)`
     background: #141414;
     border-radius: 1.5rem;
     border: 1.8px solid #ffffff;
-    width: 50%;
-    margin-right: 5rem;
     display: flex;
     align-items: center;
 
@@ -100,6 +99,22 @@ const NavLists = styled.ul`
     }
 `
 
+const LogOut = styled(Button)`
+  height: 2.2rem;
+
+  &.ant-btn-primary {
+    border: 2px solid #dadada;
+    color: #dadada;
+    background-color: rgba(0, 0, 0, 0);
+    font-weight: 500;
+  }
+
+  &.ant-btn-primary:hover {
+    color: #141414;
+    background-color: #dadada;
+  }
+`
+
 const links = [
     { name: "Home", path: "/" },
     { name: "Browse", path: "/user" },
@@ -107,10 +122,36 @@ const links = [
 ]
 
 export default function NavBar() {
+    //Get location pathname
     const location = useLocation()
+
+    //Call user's data from app
     const { user } = useApp()
+
+    //Handle Log Out
+    const handleLogout = () => {
+        console.log("<<LOG OUT>>")
+    }
+
+    //Handle Search
+    const navigate = useNavigate()
+    const handleSearch = (e: React.SyntheticEvent) => {
+        console.log("<<Test>>")
+        e.preventDefault()
+
+        const target = e.target as typeof e.target & {
+            search: { value: string };
+        };
+        const key = target.search.value
+
+        console.log(key)
+        navigate(`/search?keyword=${key}`)
+    }
+
     return <div className="container hidden lg:flex items-center px-12 h-[11%]">
-        <SearchInput placeholder="Type song, arstist and playlist" prefix={<SearchOutlined />} />
+        <form className="w-1/2 lg:mr-20 mr-8" onSubmit={handleSearch}>
+            <SearchInput name="search" placeholder="Type song, arstist and playlist" prefix={<SearchOutlined />} />
+        </form>
         <NavLists>
             {links.map((link, index) => (
                 <NavLink
@@ -122,15 +163,22 @@ export default function NavBar() {
             ))}
         </NavLists>
 
-        { user && <Logo>
-            <div className="logo-img"></div>
-            <p className="label-fullname">{ user.user_name }</p>
-        </Logo>}
-        
-        <div className="absolute right-20">
+        { user
+         ? <div className="flex items-center">
+            <Logo className="mr-8">
+                <div className="logo-img"></div>
+                <p className="label-fullname">{ user.user_name }</p>
+            </Logo>
+            <LogOut type="primary" onClick={handleLogout}>Log out</LogOut>
+         </div>
+         
+         : <div className="absolute right-20">
             <UserModal />
-        </div>
-
-
+        </div> }
+        
     </div>
+}
+
+function useFetch() {
+    throw new Error("Function not implemented.")
 }
