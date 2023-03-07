@@ -123,8 +123,8 @@ export default function Player () {
               <img className="w-full rounded-lg" src={mediaList[currentTrackIndex].cover} />
             </div>
             <div className="flex flex-col justify-center">
-              <p className="py-1">{mediaList[currentTrackIndex].name}</p>
-              <span>{mediaList[currentTrackIndex].singer}</span>
+              <p className="text-[0.9rem] py-1">{mediaList[currentTrackIndex].name}</p>
+              <span className="text-[0.75rem]">{mediaList[currentTrackIndex].singer}</span>
             </div>
           </div>,
           RHAP_UI.LOOP

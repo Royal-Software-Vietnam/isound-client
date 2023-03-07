@@ -140,7 +140,7 @@ export default function NavBar() {
         e.preventDefault()
 
         const target = e.target as typeof e.target & {
-            search: { value: string };
+            search: { value : string };
         };
         const key = target.search.value
 
@@ -150,7 +150,7 @@ export default function NavBar() {
 
     return <div className="container hidden lg:flex items-center px-12 h-[11%]">
         <form className="w-1/2 lg:mr-20 mr-8" onSubmit={handleSearch}>
-            <SearchInput name="search" placeholder="Type song, arstist and playlist" prefix={<SearchOutlined />} />
+            <SearchInput name="search" placeholder="Type song, arstist and playlist" prefix={<SearchOutlined />}/>
         </form>
         <NavLists>
             {links.map((link, index) => (

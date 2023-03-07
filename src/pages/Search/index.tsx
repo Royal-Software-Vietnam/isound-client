@@ -64,7 +64,7 @@ export default function Search () {
             setLoading(true)
             try {
                 let { data:searchData } = await get_search(keyword as string)
-                console.log(searchData)
+                // console.log(searchData)
                 setData(searchData)
             } catch(error) {
                 console.log(error)
