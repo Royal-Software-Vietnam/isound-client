@@ -32,36 +32,24 @@ const Logo = styled.div`
   }
 `;
 
-const NavLists = styled.ul`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 0 20%;
+const NavItem = styled.li`
+  color: #ffffff;
+  list-style: none;
+  text-align: left;
 
-  a {
-    width: 100%;
-    text-decoration: none;
-  }
-
-  li {
-    color: #ffffff;
-    list-style: none;
-    text-align: left;
-  }
-
-  li:hover {
+  &:hover {
     color: #e9003f;
     transition: all 0.3s ease-in-out;
   }
 
-  .primary {
+  &.primary {
     opacity: 0.75;
     font-size: 1.5rem;
     line-height: 1.5rem;
     margin-top: 5rem;
   }
 
-  .secondary {
+  &.secondary {
     opacity: 1;
     font-size: 1.1rem;
     line-height: 1.1rem;
@@ -96,13 +84,13 @@ export default function SideBar() {
         <p className="label-account">@admin</p>
       </Logo>
 
-      <NavLists>
+      <div className="flex flex-col pl-[20%]">
         {links.map((link, index) => (
-          <NavLink key={index} to={link.path} className={link.type}>
-            <li>{link.name}</li>
+          <NavLink key={index} to={link.path} className="list-none">
+            <NavItem className={link.type}>{link.name}</NavItem>
           </NavLink>
         ))}
-      </NavLists>
+      </div>
 
       <div
         onClick={(e: any) => testCreatePlaylist()}

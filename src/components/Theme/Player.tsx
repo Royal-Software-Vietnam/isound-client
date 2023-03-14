@@ -84,8 +84,6 @@ export default function Player() {
 
   const handledPrevious = () => {
     console.log("<PREVIOUS>");
-    console.log(currentTrackIndex);
-    console.log(mediaList?.length);
     setCurrentTrackIndex((currentTrack: number) =>
       currentTrack > 0 ? currentTrack - 1 : mediaList?.length - 1
     );
@@ -93,12 +91,15 @@ export default function Player() {
 
   const handleNext = () => {
     console.log("<NEXT>");
-    console.log(currentTrackIndex);
-    console.log(mediaList?.length);
     setCurrentTrackIndex((currentTrack: number) =>
       currentTrack < mediaList?.length - 1 ? currentTrack + 1 : 0
     );
   };
+
+  const handledError = () => {
+    console.log("<ERROR>");
+    alert("Bài này không nghe được ở Việt Nam rồi ! Đợi update hoặc xài VPN đi hehe");
+  }
 
   return (
     <div className="fixed bottom-0 left-0 right-0">
@@ -109,6 +110,7 @@ export default function Player() {
           preload="auto"
           onClickPrevious={handledPrevious}
           onClickNext={handleNext}
+          onError={handledError}
           showSkipControls={true}
           showJumpControls={false}
           layout="horizontal-reverse"

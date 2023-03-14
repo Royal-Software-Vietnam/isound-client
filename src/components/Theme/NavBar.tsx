@@ -37,6 +37,9 @@ const SearchInput = styled(Input)`
 `;
 
 const NavItem = styled.li`
+  height: 100%;
+  display: flex;
+  align-items: center;
   font-size: 1.2rem;
   line-height: 1.2rem;
   color: #e3dede;
@@ -56,16 +59,25 @@ const NavItem = styled.li`
 
   &::after {
     content: "";
-    width: 20px;
+    width: 24px;
     height: 2px;
     position: absolute;
     background: #141414;
-    bottom: -8px;
+    bottom: 28px;
     left: 0;
+    opacity: 0;
+  }
+
+  &:hover::after {
+    background:  #e9003f;
+    opacity: 0.3;
+    transition: all 0.4s ease-in-out;
   }
 
   &.active::after {
     background: #e9003f;
+    transition: all 0.3s ease-in-out;
+    opacity: 1;
   }
 `;
 
@@ -164,12 +176,12 @@ export default function NavBar() {
           prefix={<SearchOutlined />}
         />
       </form>
-      <div className="w-1/2 sm:flex hidden items-center justify-center">
+      <div className="w-1/2 sm:flex hidden items-center justify-center h-[90%]">
         {links.map((link, index) => (
           <NavLink
             key={index}
             to={link.path}
-            className="list-none mr-10 lg:text-[1.2rem] text-[1rem]"
+            className="list-none mr-10 lg:text-[1.2rem] text-[1rem] h-full"
           >
             <NavItem className={location.pathname === link.path ? "active" : ""}>
               {link.name}
