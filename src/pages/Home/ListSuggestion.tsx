@@ -20,10 +20,10 @@ export default function ListSuggestion ({data}:{data:any}) {
         } // finally { setLoading(false) }
     }
 
-    return <div className="w-[50%] h-[100%] bg-[#141414] text-white">
+    return <div className="lg:w-[50%] w-[100%] lg:h-[100%] bg-[#141414] text-white">
         <h2 className="text-[1.5rem] leading-6">Made For You</h2>
         <p className="text-[1rem] leading-4 my-4">The more you listen for better recommandation</p>
-        <div className="h-[50%] grid lg:grid-cols-3 grid-cols-2 gap-3 mr-[8%]">
+        <div className="h-[50%] grid grid-cols-3 gap-3 lg:mr-[8%]">
         {data && data?.slice(6, 12).map((box:any, index:number) => (
                 <div key={box?.id} onClick={()=> addToList(box)} style={{cursor:'pointer'}}>
                     <img className="rounded-lg hover:cursor hover:opacity-80" src={box?.bestThumbnail?.url}/>
