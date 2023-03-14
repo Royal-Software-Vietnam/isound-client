@@ -38,7 +38,7 @@ export default function ListPlayed({ data }: { data: any }) {
       <p className="text-[1rem] leading-4 my-4">
         Only for you for better live music
       </p>
-      <div className="lg:h-[100%] h-[20rem] overflow-auto">
+      <div className="lg:h-[100%] h-[20rem] overflow-auto overflow-x-hidden">
         {data &&
           data?.slice(0, 5).map((box: any, index: number) => (
             <div

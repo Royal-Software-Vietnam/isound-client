@@ -36,34 +36,25 @@ const SearchInput = styled(Input)`
   }
 `;
 
-const NavLists = styled.ul`
-  display: flex;
+const NavItem = styled.li`
+  font-size: 1.2rem;
+  line-height: 1.2rem;
+  color: #e3dede;
+  list-style: none;
+  text-align: left;
+  letter-spacing: 3px;
+  position: relative;
 
-  a {
-    text-decoration: none;
-  }
-
-  li {
-    font-size: 1.2rem;
-    line-height: 1.2rem;
-    color: #e3dede;
-    list-style: none;
-    text-align: left;
-    letter-spacing: 3px;
-    margin-left: 46px;
-    position: relative;
-  }
-
-  li:hover {
+  :hover {
     color: #e9003f;
     transition: all 0.3s ease-in-out;
   }
 
-  li.active {
+  &.active {
     color: #e9003f;
   }
 
-  li::after {
+  &::after {
     content: "";
     width: 20px;
     height: 2px;
@@ -73,7 +64,7 @@ const NavLists = styled.ul`
     left: 0;
   }
 
-  li.active::after {
+  &.active::after {
     background: #e9003f;
   }
 `;
@@ -96,13 +87,13 @@ const LogOut = styled(Button)`
 `;
 
 const DropItem = styled(Dropdown)`
-    :hover {
-        cursor: pointer;
-    }
+  :hover {
+    cursor: pointer;
+  }
 
-    &.ant-dropdown-menu {
-        background-color: #222222;
-    }
+  &.ant-dropdown-menu {
+    background-color: #222222;
+  }
 `;
 
 const links = [
@@ -162,33 +153,40 @@ export default function NavBar() {
   ];
 
   return (
-    <div className="container flex items-center px-12 h-[11%]">
-      <form className="lg:w-1/2 lg:mr-20 mr-8" onSubmit={handleSearch}>
+    <div className="container flex items-center px-12 lg:h-[11%] h-[8%]">
+      <form
+        className="lg:w-1/2 w-[20rem] lg:mr-20 mr-8"
+        onSubmit={handleSearch}
+      >
         <SearchInput
           name="search"
           placeholder="Type song, arstist and playlist"
           prefix={<SearchOutlined />}
         />
       </form>
-      <NavLists>
+      <div className="w-1/2 sm:flex hidden items-center justify-center">
         {links.map((link, index) => (
-          <NavLink key={index} to={link.path}>
-            <li className={location.pathname === link.path ? "active" : ""}>
+          <NavLink
+            key={index}
+            to={link.path}
+            className="list-none mr-10 lg:text-[1.2rem] text-[1rem]"
+          >
+            <NavItem className={location.pathname === link.path ? "active" : ""}>
               {link.name}
-            </li>
+            </NavItem>
           </NavLink>
         ))}
-      </NavLists>
+      </div>
 
       {user ? (
-        <div className="absolute right-0 lg:right-10 flex items-center">
+        <div className="absolute right-2 lg:right-10 flex items-center">
           <DropItem menu={{ items }} trigger={["click"]}>
             <a onClick={(e) => e.preventDefault()}>
               <Space>
-                <div className="w-[4rem] flex items-center justify-center">
-                  <div className="w-[3rem] h-[3rem] bg-[#FFFFFF] rounded-full"></div>
+                <div className="lg:w-[4rem] w-[2rem] flex items-center justify-center">
+                  <div className="lg:w-[3rem] lg:h-[3rem] w-[2rem] h-[2rem] bg-[#FFFFFF] rounded-full"></div>
                 </div>
-                <DownOutlined />
+                <DownOutlined className="sm:block hidden" />
               </Space>
             </a>
           </DropItem>
