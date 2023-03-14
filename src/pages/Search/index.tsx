@@ -54,12 +54,42 @@ const StyledTab = styled(Tabs)`
   }
 `;
 
+
+
 export default function Search() {
   const urlParams = new URLSearchParams(window.location.search);
   const keyword = urlParams.get("keyword");
   const location = useLocation();
   const { setLoading } = useApp();
   const [data, setData] = useState([]);
+  const items = [
+  {
+    key: '0',
+    label: `Searching Result`,
+    children: (<div>Title</div>),
+    disabled: true,
+  },
+  {
+    key: '1',
+    label: `All`,
+    children: (<SearchAllData data={data} />),
+  },
+  {
+    key: '2',
+    label: `Songs`,
+    children: (<SearchSongs data={data} />),
+  },
+  {
+    key: '3',
+    label: `Playlist/Album`,
+    children: (<SearchAlbum data={data} />),
+  },
+  {
+    key: '4',
+    label: `Artist`,
+    children: (<SearchArtist data={data} />),
+  },
+];
 
   const getDataByKeyword = async () => {
     setLoading(true);
@@ -80,24 +110,7 @@ export default function Search() {
 
   return (
     <div className="container px-12">
-      {/* <StyledTab defaultActiveKey="1" items={items} onChange={onChange} /> */}
-      <StyledTab defaultActiveKey="1">
-        <Tabs.TabPane tab="Searching Result" key="0" disabled={true}>
-          <div>Title</div>
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="All" key="1">
-          <SearchAllData data={data} />
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="Songs" key="2">
-          <SearchSongs data={data} />
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="Playlist/Album" key="3">
-          <SearchAlbum data={data} />
-        </Tabs.TabPane>
-        <Tabs.TabPane tab="Artist" key="4">
-          <SearchArtist data={data} />
-        </Tabs.TabPane>
-      </StyledTab>
+      <StyledTab defaultActiveKey="1" items={items}/>
     </div>
   );
 }

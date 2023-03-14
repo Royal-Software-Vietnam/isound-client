@@ -5,7 +5,7 @@ import { useApp } from "../../context";
 function SearchAllData({ data }: { data: any }) {
   const { mediaList, setMediaList }: any = useApp();
 
-  console.log(data?.videos);
+  // console.log(data?.videos);
 
   const addToList = async (data: any) => {
     console.log(data?.videoId);

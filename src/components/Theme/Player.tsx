@@ -82,15 +82,19 @@ export default function Player() {
   const { mediaList }: any = useApp();
   const [currentTrackIndex, setCurrentTrackIndex] = useState<number>(0);
 
-  const handleEnded = () => {
-    console.log("<END>");
+  const handledPrevious = () => {
+    console.log("<PREVIOUS>");
+    console.log(currentTrackIndex);
+    console.log(mediaList?.length);
     setCurrentTrackIndex((currentTrack: number) =>
-      currentTrack < mediaList?.length - 1 ? currentTrack + 1 : 0
+      currentTrack > 0 ? currentTrack - 1 : mediaList?.length - 1
     );
   };
 
   const handleNext = () => {
     console.log("<NEXT>");
+    console.log(currentTrackIndex);
+    console.log(mediaList?.length);
     setCurrentTrackIndex((currentTrack: number) =>
       currentTrack < mediaList?.length - 1 ? currentTrack + 1 : 0
     );
@@ -98,15 +102,13 @@ export default function Player() {
 
   return (
     <div className="fixed bottom-0 left-0 right-0">
-      {/* <ReactJkMusicPlayer drag audioLists={mediaList} preload={true} defaultVolume={50} /> */}
       {mediaList.length > 0 && (
         <RhapPlayer
           autoPlay={true}
           src={mediaList[currentTrackIndex].src}
           preload="auto"
-          onEnded={handleEnded}
+          onClickPrevious={handledPrevious}
           onClickNext={handleNext}
-          // onPlay={e => console.log("onPlay")}
           showSkipControls={true}
           showJumpControls={false}
           layout="horizontal-reverse"
@@ -122,9 +124,9 @@ export default function Player() {
           showFilledProgress={true}
           customAdditionalControls={[
             <div className="max-h-12 w-[25rem] flex items-center">
-              <div className="w-[9rem] px-3">
+              <div className="max-w-[8rem] px-3">
                 <img
-                  className="w-full rounded-lg"
+                  className="w-full h-12 rounded-lg object-cover"
                   src={mediaList[currentTrackIndex].cover}
                 />
               </div>
